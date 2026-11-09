@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connections</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --background: #FBF8F2;
+  --foreground: #22201C;
+  --primary: #C05621;
+  --primary-foreground: #FFF7ED;
+  --muted: #F0EAE0;
+  --muted-foreground: #6B6358;
+  --border: #E2D9CB;
+  --accent: #1F6F5C;
+  --card: #FFFFFF;
+  --font-heading: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --radius: 14px;
+}
+html, body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-body); }
+
+[data-goto],button,a[href]{transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
+[data-goto]:hover,button:hover{transform:translateY(-2px);filter:brightness(1.04)}
+.m-t{opacity:0;transform:translateY(var(--m-rise)) scale(var(--m-scale));transition:opacity var(--m-ms) var(--m-ease),transform var(--m-ms) var(--m-ease);transition-delay:var(--m-delay,0ms)}
+img.m-t{transform:scale(1.06)}
+.m-t.m-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.m-t{opacity:1;transform:none;transition:none}[data-goto]:hover,button:hover{transform:none}}
+</style>
+</head>
+<body>
+<!-- navigation -->
+<nav class="sticky top-0 z-50 bg-[var(--background)]/95 backdrop-blur border-b border-[var(--border)]">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex items-center justify-between h-16 gap-4">
+      <a href="#" data-goto="ask-and-learn" class="flex items-center gap-2 shrink-0">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-[var(--accent)]"></span>
+        <span class="text-lg tracking-tight text-[var(--foreground)]" style="font-family:var(--font-heading)">Nestpoints</span>
+      </a>
+
+      <ul class="hidden md:flex items-center gap-8 text-sm text-[var(--muted-foreground)]">
+        <li><a href="#" data-goto="ask-and-learn" class="hover:text-[var(--foreground)] transition-colors">Ask &amp; Learn</a></li>
+        <li><a href="#" data-goto="money-tracker" class="hover:text-[var(--foreground)] transition-colors">Money Tracker</a></li>
+        <li><a href="#" data-goto="perks-and-partners" class="hover:text-[var(--foreground)] transition-colors">Perks &amp; Partners</a></li>
+        <li><a href="#" data-goto="connections" class="hover:text-[var(--foreground)] transition-colors">Connections</a></li>
+      </ul>
+      <!-- say: I'm keeping mobile simple with just brand and CTA. -->
+
+      <a href="#" data-goto="money-tracker" class="inline-flex items-center justify-center shrink-0 px-4 py-2 text-sm font-medium bg-[var(--primary)] text-[var(--primary-foreground)] rounded-[var(--radius)] hover:opacity-90 transition-opacity">Start Free</a>
+    </div>
+
+    <div class="md:hidden pb-3 -mt-1 flex flex-wrap gap-x-5 gap-y-1 text-sm text-[var(--muted-foreground)]">
+      <a href="#" data-goto="ask-and-learn" class="hover:text-[var(--foreground)] transition-colors">Ask &amp; Learn</a>
+      <a href="#" data-goto="money-tracker" class="hover:text-[var(--foreground)] transition-colors">Money Tracker</a>
+      <a href="#" data-goto="perks-and-partners" class="hover:text-[var(--foreground)] transition-colors">Perks &amp; Partners</a>
+      <a href="#" data-goto="connections" class="hover:text-[var(--foreground)] transition-colors">Connections</a>
+    </div>
+  </div>
+</nav>
+
+<!-- hero -->
+<section class="bg-[var(--background)]">
+  <!-- say: Opening the connections hero with warm paper breathing room -->
+  <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
+
+      <div>
+        <!-- say: Rust eyebrow sets the section apart from other pages -->
+        <p class="text-[var(--accent)] text-sm font-semibold tracking-widest uppercase mb-4">Connections</p>
+
+        <h1 style="font-family:var(--font-heading)" class="text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] text-[var(--foreground)]">
+          You shouldn't have to figure this out alone.
+        </h1>
+
+        <p class="mt-6 text-lg leading-relaxed text-[var(--muted-foreground)] max-w-xl">
+          Nestpoints connects first-time buyers with vetted agents, patient lenders, and neighbors who've just done it — plus referrals that pay you back and a data promise in plain English.
+        </p>
+
+        <!-- say: Two clear next steps, one primary and one quieter -->
+        <div class="mt-10 flex flex-col sm:flex-row gap-3 sm:items-center">
+          <a href="#" data-goto="ask-and-learn" class="inline-flex items-center justify-center px-7 py-3.5 rounded-[var(--radius)] bg-[var(--primary)] text-[var(--primary-foreground)] font-semibold text-base hover:opacity-90 transition-opacity">
+            Find your match
+          </a>
+          <a href="#" data-goto="money-tracker" class="inline-flex items-center justify-center px-7 py-3.5 rounded-[var(--radius)] border border-[var(--border)] text-[var(--foreground)] font-semibold text-base hover:bg-[var(--muted)] transition-colors">
+            Read the data promise
+          </a>
+        </div>
+      </div>
+
+      <!-- say: One real photo of people meeting, in a sized frame -->
+      <div class="aspect-[4/3] w-full rounded-[var(--radius)] overflow-hidden border border-[var(--border)] bg-[var(--muted)]">
+        <img data-gen="Warm candid photo of three people at a kitchen table reviewing paperwork together, soft daylight, muted rust and cream tones, calm documentary mood" alt="A first-time buyer talking through paperwork with an agent and a lender at a kitchen table" class="w-full h-full object-cover rounded-[var(--radius)]" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20300%22%20preserveAspectRatio%3D%22xMidYMid%20slice%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23F0EAE0%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23FFFFFF%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22400%22%20height%3D%22300%22%20fill%3D%22url(%23g)%22%2F%3E%3Ccircle%20cx%3D%22344.72%22%20cy%3D%2289.68%22%20r%3D%2230.288%22%20fill%3D%22%231F6F5C%22%20fill-opacity%3D%22.35%22%2F%3E%3Crect%20x%3D%2299.28%22%20y%3D%22124.56%22%20width%3D%22111.92%22%20height%3D%22109.92%22%20rx%3D%2210%22%20fill%3D%22none%22%20stroke%3D%22%23C05621%22%20stroke-opacity%3D%22.35%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-dasharray%3D%227%204%22%2F%3E%3Ccircle%20cx%3D%22297.12%22%20cy%3D%22187.44%22%20r%3D%2247.935%22%20fill%3D%22none%22%20stroke%3D%22%23C05621%22%20stroke-opacity%3D%22.35%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-dasharray%3D%227%204%22%2F%3E%3Ctext%20x%3D%22200%22%20y%3D%22282%22%20text-anchor%3D%22middle%22%20font-family%3D%22ui-monospace%2Cmonospace%22%20font-size%3D%2210%22%20fill%3D%22%236B6358%22%3Epainting%20%C2%B7%20Warm%20candid%20photo%20of%20thre%E2%80%A6%3C%2Ftext%3E%3C%2Fsvg%3E" data-sketch="">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- match-with-a-pro -->
+<section class="bg-[var(--background)] py-20 sm:py-28" aria-labelledby="match-pro-heading">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- say: Heading block sets the promise, then three equal cards. -->
+    <div class="max-w-2xl">
+      <p class="text-xs font-medium uppercase tracking-[0.18em] text-[var(--accent)]">Connections</p>
+      <h2 id="match-pro-heading" class="mt-4 text-3xl sm:text-4xl font-semibold leading-tight text-[var(--foreground)]" style="font-family:var(--font-heading)">
+        Matched in days, not months.
+      </h2>
+      <p class="mt-4 text-base sm:text-lg leading-relaxed text-[var(--muted-foreground)]">
+        Answer five questions and we hand-pick three professionals who fit your budget, your timeline, and your zip code. Every pro is license-verified and rated by buyers who closed with them.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-6 sm:gap-8 md:grid-cols-3">
+      <!-- say: Buyer's agent card with star rating in rust header strip. -->
+      <article class="flex flex-col bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6 sm:p-7">
+        <div class="flex items-baseline justify-between gap-3">
+          <h3 class="text-lg font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Buyer's agent</h3>
+          <span class="shrink-0 text-sm font-medium text-[var(--accent)]">4.9 stars</span>
+        </div>
+        <p class="mt-4 text-sm leading-relaxed text-[var(--muted-foreground)]">
+          214 first-time closings, average 11% under asking for clients in your bracket.
+        </p>
+        <div class="mt-6 pt-5 border-t border-[var(--border)] flex items-center gap-1" aria-hidden="true">
+          <svg viewBox="0 0 20 20" class="w-4 h-4 fill-[var(--accent)]"><path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9 4.7 17.6l1-5.8L1.5 7.7l5.9-.9z"/></svg>
+          <svg viewBox="0 0 20 20" class="w-4 h-4 fill-[var(--accent)]"><path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9 4.7 17.6l1-5.8L1.5 7.7l5.9-.9z"/></svg>
+          <svg viewBox="0 0 20 20" class="w-4 h-4 fill-[var(--accent)]"><path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9 4.7 17.6l1-5.8L1.5 7.7l5.9-.9z"/></svg>
+          <svg viewBox="0 0 20 20" class="w-4 h-4 fill-[var(--accent)]"><path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9 4.7 17.6l1-5.8L1.5 7.7l5.9-.9z"/></svg>
+          <svg viewBox="0 0 20 20" class="w-4 h-4 fill-[var(--accent)]"><path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9 4.7 17.6l1-5.8L1.5 7.7l5.9-.9z"/></svg>
+        </div>
+      </article>
+
+      <!-- say: Loan officer card mirrors the first for a steady rhythm. -->
+      <article class="flex flex-col bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6 sm:p-7">
+        <div class="flex items-baseline justify-between gap-3">
+          <h3 class="text-lg font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Loan officer</h3>
+          <span class="shrink-0 text-sm font-medium text-[var(--accent)]">4.8 stars</span>
+        </div>
+        <p class="mt-4 text-sm leading-relaxed text-[var(--muted-foreground)]">
+          168 first-time loans, specializes in low-down-payment programs and down-payment assistance.
+        </p>
+        <div class="mt-6 pt-5 border-t border-[var(--border)] flex items-center gap-1" aria-hidden="true">
+          <svg viewBox="0 0 20 20" class="w-4 h-4 fill-[var(--accent)]"><path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9 4.7 17.6l1-5.8L1.5 7.7l5.9-.9z"/></svg>
+          <svg viewBox="0 0 20 20" class="w-4 h-4 fill-[var(--accent)]"><path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9 4.7 17.6l1-5.8L1.5 7.7l5.9-.9z"/></svg>
+          <svg viewBox="0 0 20 20" class="w-4 h-4 fill-[var(--accent)]"><path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9 4.7 17.6l1-5.8L1.5 7.7l5.9-.9z"/></svg>
+          <svg viewBox="0 0 20 20" class="w-4 h-4 fill-[var(--accent)]"><path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9 4.7 17.6l1-5.8L1.5 7.7l5.9-.9z"/></svg>
+          <svg viewBox="0 0 20 20" class="w-4 h-4 fill-[var(--accent)]"><path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9 4.7 17.6l1-5.8L1.5 7.7l5.9-.9z"/></svg>
+        </div>
+      </article>
+
+      <!-- say: Neighbor mentor card closes the set, same layout. -->
+      <article class="flex flex-col bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6 sm:p-7">
+        <div class="flex items-baseline justify-between gap-3">
+          <h3 class="text-lg font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Neighbor mentor</h3>
+          <span class="shrink-0 text-sm font-medium text-[var(--accent)]">5.0 stars</span>
+        </div>
+        <p class="mt-4 text-sm leading-relaxed text-[var(--muted-foreground)]">
+          Bought in your neighborhood 14 months ago, volunteers two calls a month.
+        </p>
+        <div class="mt-6 pt-5 border-t border-[var(--border)] flex items-center gap-1" aria-hidden="true">
+          <svg viewBox="0 0 20 20" class="w-4 h-4 fill-[var(--accent)]"><path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9 4.7 17.6l1-5.8L1.5 7.7l5.9-.9z"/></svg>
+          <svg viewBox="0 0 20 20" class="w-4 h-4 fill-[var(--accent)]"><path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9 4.7 17.6l1-5.8L1.5 7.7l5.9-.9z"/></svg>
+          <svg viewBox="0 0 20 20" class="w-4 h-4 fill-[var(--accent)]"><path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9 4.7 17.6l1-5.8L1.5 7.7l5.9-.9z"/></svg>
+          <svg viewBox="0 0 20 20" class="w-4 h-4 fill-[var(--accent)]"><path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9 4.7 17.6l1-5.8L1.5 7.7l5.9-.9z"/></svg>
+          <svg viewBox="0 0 20 20" class="w-4 h-4 fill-[var(--accent)]"><path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9 4.7 17.6l1-5.8L1.5 7.7l5.9-.9z"/></svg>
+        </div>
+      </article>
+    </div>
+
+    <!-- say: Single action sits left, aligned with the heading. -->
+    <div class="mt-10 sm:mt-12">
+      <a href="#ask-and-learn" data-goto="ask-and-learn" class="inline-flex items-center gap-2 rounded-[var(--radius)] bg-[var(--primary)] px-6 py-3 text-sm font-medium text-[var(--primary-foreground)] transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)]">
+        Start matching
+        <svg viewBox="0 0 20 20" class="w-4 h-4 fill-current" aria-hidden="true"><path d="M7.3 4.3a1 1 0 011.4 0l5 5a1 1 0 010 1.4l-5 5a1 1 0 11-1.4-1.4L11.6 10 7.3 5.7a1 1 0 010-1.4z"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- referral-rewards -->
+<section class="bg-[var(--background)] py-20 sm:py-24">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <!-- say: Referral layer, keeping the ledger rhythm of the page. -->
+    <div class="max-w-2xl">
+      <p class="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">Referrals</p>
+      <h2 class="mt-4 text-3xl sm:text-4xl font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Referrals that pay both sides.</h2>
+      <p class="mt-5 text-base sm:text-lg leading-relaxed text-[var(--muted-foreground)]">Send a friend to Nestpoints and you each get 2,500 points toward your home fund the day they connect their savings account.</p>
+    </div>
+
+    <!-- say: Three numbered cards in a row, ruled like passbook entries. -->
+    <ol class="mt-12 grid gap-5 sm:grid-cols-3">
+      <li class="rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] p-6">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-semibold text-[var(--primary-foreground)]">1</span>
+        <h3 class="mt-5 text-lg font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Share your link</h3>
+        <p class="mt-2 text-sm leading-relaxed text-[var(--muted-foreground)]">One tap from your ledger.</p>
+      </li>
+      <li class="rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] p-6">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-semibold text-[var(--primary-foreground)]">2</span>
+        <h3 class="mt-5 text-lg font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">They start free</h3>
+        <p class="mt-2 text-sm leading-relaxed text-[var(--muted-foreground)]">They link a savings goal.</p>
+      </li>
+      <li class="rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] p-6">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-semibold text-[var(--primary-foreground)]">3</span>
+        <h3 class="mt-5 text-lg font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">You both bank 2,500 points</h3>
+        <p class="mt-2 text-sm leading-relaxed text-[var(--muted-foreground)]">Redeemable toward closing costs through our lender partners.</p>
+      </li>
+    </ol>
+
+    <!-- say: Fine print and button sit on a muted panel, plainly stated. -->
+    <div class="mt-10 grid gap-8 rounded-[var(--radius)] bg-[var(--muted)] p-6 sm:p-8 sm:grid-cols-[1fr_auto] sm:items-end">
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--muted-foreground)]">The fine print, done plainly</h3>
+        <ul class="mt-4 space-y-2 text-sm leading-relaxed text-[var(--foreground)]">
+          <li class="flex gap-3">
+            <span aria-hidden="true" class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span>
+            <span>No cap on friends.</span>
+          </li>
+          <li class="flex gap-3">
+            <span aria-hidden="true" class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span>
+            <span>Points post within 24 hours.</span>
+          </li>
+          <li class="flex gap-3">
+            <span aria-hidden="true" class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span>
+            <span>Referral points never expire while your account is active.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-3 sm:items-end">
+        <a href="#" data-goto="money-tracker" class="inline-flex items-center justify-center rounded-[var(--radius)] bg-[var(--primary)] px-6 py-3 text-sm font-semibold text-[var(--primary-foreground)] transition-opacity hover:opacity-90">Get your referral link</a>
+        <a href="#" data-goto="perks-and-partners" class="text-sm font-medium text-[var(--accent)] underline-offset-4 hover:underline">See lender partner perks</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- data-safety-promise -->
+<section class="bg-[var(--background)] py-20 sm:py-28">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <!-- say: Opening the plain-English data promise with a strong headline. -->
+    <div class="max-w-2xl">
+      <p class="text-xs uppercase tracking-[0.18em] text-[var(--muted-foreground)] mb-4">Data safety</p>
+      <h2 class="text-3xl sm:text-4xl leading-tight text-[var(--foreground)]" style="font-family:var(--font-heading)">
+        Your data stays yours. Here it is in plain English.
+      </h2>
+    </div>
+
+    <!-- say: Listing each promise as a numbered passbook line, not cards. -->
+    <div class="mt-12 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] overflow-hidden">
+      <ol class="divide-y divide-[var(--border)]">
+
+        <li class="flex gap-5 sm:gap-8 px-5 sm:px-8 py-6">
+          <span class="shrink-0 w-8 text-sm font-semibold text-[var(--accent)] tabular-nums pt-0.5" style="font-family:var(--font-heading)">01</span>
+          <p class="text-base sm:text-lg leading-relaxed text-[var(--foreground)]">
+            We never sell your information. Not to agents, not to lenders, not to anyone.
+          </p>
+        </li>
+
+        <li class="flex gap-5 sm:gap-8 px-5 sm:px-8 py-6">
+          <span class="shrink-0 w-8 text-sm font-semibold text-[var(--accent)] tabular-nums pt-0.5" style="font-family:var(--font-heading)">02</span>
+          <p class="text-base sm:text-lg leading-relaxed text-[var(--foreground)]">
+            You approve every professional before they see your name, income range, or savings progress.
+          </p>
+        </li>
+
+        <li class="flex gap-5 sm:gap-8 px-5 sm:px-8 py-6">
+          <span class="shrink-0 w-8 text-sm font-semibold text-[var(--accent)] tabular-nums pt-0.5" style="font-family:var(--font-heading)">03</span>
+          <p class="text-base sm:text-lg leading-relaxed text-[var(--foreground)]">
+            Lenders see only what you send them — a share link you can revoke in one tap.
+          </p>
+        </li>
+
+        <!-- say: Fourth promise covers read-only bank connections. -->
+        <li class="flex gap-5 sm:gap-8 px-5 sm:px-8 py-6">
+          <span class="shrink-0 w-8 text-sm font-semibold text-[var(--accent)] tabular-nums pt-0.5" style="font-family:var(--font-heading)">04</span>
+          <p class="text-base sm:text-lg leading-relaxed text-[var(--foreground)]">
+            Bank connections are read-only through our encrypted partner; we can see balances move, never move money.
+          </p>
+        </li>
+
+        <li class="flex gap-5 sm:gap-8 px-5 sm:px-8 py-6">
+          <span class="shrink-0 w-8 text-sm font-semibold text-[var(--accent)] tabular-nums pt-0.5" style="font-family:var(--font-heading)">05</span>
+          <p class="text-base sm:text-lg leading-relaxed text-[var(--foreground)]">
+            Delete your account and everything goes within 30 days — export it first if you want it.
+          </p>
+        </li>
+
+      </ol>
+    </div>
+
+    <!-- say: Closing with one quiet link to the full promise page. -->
+    <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+      <a href="#" data-goto="ask-and-learn"
+         class="inline-flex items-center justify-center px-6 py-3 rounded-[var(--radius)] bg-[var(--primary)] text-[var(--primary-foreground)] text-sm font-semibold border border-[var(--primary)] hover:opacity-90 transition-opacity self-start">
+        Read the full promise
+      </a>
+      <p class="text-sm text-[var(--muted-foreground)]">Same words we publish, no legal footnote.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- rental-to-owner-path -->
+<section class="bg-[var(--background)] py-20">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- say: Laying out the renter timeline header first -->
+    <div class="max-w-2xl">
+      <h2 class="text-3xl md:text-4xl text-[var(--foreground)] tracking-tight" style="font-family:var(--font-heading)">Renting now? You're already on the path.</h2>
+      <p class="mt-4 text-base md:text-lg text-[var(--muted-foreground)]">Renters get the same connections, and your on-time rent can count toward your readiness score.</p>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-4">
+      <!-- say: Four milestone cards, one per month marker -->
+      <div class="relative bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6">
+        <span class="inline-block text-xs font-semibold tracking-wide uppercase text-[var(--accent)]">Month 0</span>
+        <p class="mt-3 text-[var(--foreground)] leading-relaxed">Connect your rental and set a down-payment goal.</p>
+        <span class="absolute top-6 right-6 text-2xl font-semibold text-[var(--muted)]" style="font-family:var(--font-heading)" aria-hidden="true">01</span>
+      </div>
+
+      <div class="relative bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6">
+        <span class="inline-block text-xs font-semibold tracking-wide uppercase text-[var(--accent)]">Month 3</span>
+        <p class="mt-3 text-[var(--foreground)] leading-relaxed">Meet a lender for a no-credit-pull pre-check.</p>
+        <span class="absolute top-6 right-6 text-2xl font-semibold text-[var(--muted)]" style="font-family:var(--font-heading)" aria-hidden="true">02</span>
+      </div>
+
+      <div class="relative bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6">
+        <span class="inline-block text-xs font-semibold tracking-wide uppercase text-[var(--accent)]">Month 6</span>
+        <p class="mt-3 text-[var(--foreground)] leading-relaxed">Match with a buyer's agent and start touring.</p>
+        <span class="absolute top-6 right-6 text-2xl font-semibold text-[var(--muted)]" style="font-family:var(--font-heading)" aria-hidden="true">03</span>
+      </div>
+
+      <div class="relative bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6">
+        <span class="inline-block text-xs font-semibold tracking-wide uppercase text-[var(--accent)]">Month 12</span>
+        <p class="mt-3 text-[var(--foreground)] leading-relaxed">Average Nestpoints renter has 3.1 months of runway saved and a pre-approval in hand.</p>
+        <span class="absolute top-6 right-6 text-2xl font-semibold text-[var(--muted)]" style="font-family:var(--font-heading)" aria-hidden="true">04</span>
+      </div>
+    </div>
+
+    <!-- say: Closing actions below the timeline -->
+    <div class="mt-10 flex flex-wrap items-center gap-4">
+      <a href="#" data-goto="money-tracker" class="inline-flex items-center justify-center bg-[var(--primary)] text-[var(--primary-foreground)] px-6 py-3 rounded-[var(--radius)] font-medium hover:opacity-90 transition">Start the renter path</a>
+      <a href="#" data-goto="perks-and-partners" class="inline-flex items-center text-[var(--foreground)] underline underline-offset-4 decoration-[var(--border)] hover:decoration-[var(--accent)]">See renter perks and partners</a>
+    </div>
+  </div>
+</section>
+
+<!-- member-stories -->
+<section class="bg-[var(--background)] py-20">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-2xl">
+      <p class="text-sm uppercase tracking-widest text-[var(--accent)] mb-3" style="font-family:var(--font-heading)">Member stories</p>
+      <!-- say: Setting the section headline, kept word for word -->
+      <h2 class="text-3xl md:text-4xl leading-tight text-[var(--foreground)]" style="font-family:var(--font-heading)">Neighbors who just did this.</h2>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      <!-- say: First story card for Dana and Marcus -->
+      <article class="flex flex-col bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-7">
+        <p class="text-[var(--foreground)] leading-relaxed">
+          Dana and Marcus, renters in Austin — matched with a lender in four days, closed on a $312,000 townhome with 5% down.
+        </p>
+        <!-- say: Quoting the member directly beneath the summary -->
+        <blockquote class="mt-5 pl-4 border-l-2 border-[var(--accent)] text-[var(--muted-foreground)] leading-relaxed">
+          "Our mentor answered the scared questions we didn't want to ask an agent."
+        </blockquote>
+      </article>
+
+      <!-- say: Second story card, referral points and data promise -->
+      <article class="flex flex-col bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-7">
+        <p class="text-[var(--foreground)] leading-relaxed">
+          Priya, first-generation buyer in Columbus — earned 41,000 points through referrals and restaurant spending, put them toward closing costs.
+        </p>
+        <blockquote class="mt-5 pl-4 border-l-2 border-[var(--accent)] text-[var(--muted-foreground)] leading-relaxed">
+          "The data promise is why I signed up. Nobody had my income range until I said so."
+        </blockquote>
+      </article>
+
+      <!-- say: Third story card for the Okafor family -->
+      <article class="flex flex-col bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-7">
+        <p class="text-[var(--foreground)] leading-relaxed">
+          The Okafor family, Charlotte — used the renter path for 14 months and bought their first house in March.
+        </p>
+      </article>
+    </div>
+
+    <!-- say: Single link out to the perks page -->
+    <div class="mt-10">
+      <a href="#" data-goto="perks-and-partners" class="inline-flex items-center gap-2 px-6 py-3 rounded-[var(--radius)] bg-[var(--primary)] text-[var(--primary-foreground)] font-medium hover:opacity-90 transition-opacity">Read more stories</a>
+    </div>
+  </div>
+</section>
+
+<!-- cta -->
+<section class="bg-[var(--background)] py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] px-6 py-14 md:px-16 md:py-20 text-center">
+      <h2 class="text-3xl md:text-5xl font-semibold tracking-tight text-[var(--foreground)]" style="font-family:var(--font-heading)">
+        One link, three good connections.
+      </h2>
+      <!-- say: Short subline, then the single primary action. -->
+      <p class="mt-5 text-base md:text-lg text-[var(--muted-foreground)] max-w-xl mx-auto leading-relaxed">
+        Start free, match with a pro this week, and see your referral points land before the month ends.
+      </p>
+      <div class="mt-9 flex flex-col items-center gap-4">
+        <a href="#" data-goto="money-tracker" class="inline-flex items-center justify-center rounded-[var(--radius)] bg-[var(--primary)] px-8 py-3.5 text-base font-medium text-[var(--primary-foreground)] transition-opacity hover:opacity-90">
+          Start Free
+        </a>
+        <!-- say: Quiet secondary link keeps the focus on one button. -->
+        <a href="#" data-goto="ask-and-learn" class="text-sm font-medium text-[var(--foreground)] underline decoration-[var(--accent)] decoration-2 underline-offset-4 hover:text-[var(--accent)]">
+          Or ask a question first
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer class="bg-[var(--muted)] border-t border-[var(--border)]">
+  <div class="max-w-6xl mx-auto px-6 py-14">
+    <div class="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+      <div class="max-w-sm">
+        <p class="text-xl text-[var(--foreground)]" style="font-family:var(--font-heading)">Nestpoints</p>
+        <!-- say: Brand promise sits alone under the wordmark -->
+        <p class="mt-2 text-sm leading-relaxed text-[var(--muted-foreground)]">Every first-time buyer deserves a straight answer.</p>
+      </div>
+      <nav aria-label="Footer" class="grid grid-cols-2 gap-x-8 gap-y-3 text-sm sm:gap-x-14">
+        <a href="#" data-goto="ask-and-learn" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Ask &amp; Learn</a>
+        <a href="#" data-goto="money-tracker" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Money Tracker</a>
+        <a href="#" data-goto="perks-and-partners" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Perks &amp; Partners</a>
+        <a href="#" data-goto="connections" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Connections</a>
+        <!-- say: Remaining footer links are text-only, no page targets -->
+        <a href="#" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Data Safety Promise</a>
+        <a href="#" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Refer a Friend</a>
+      </nav>
+    </div>
+    <div class="mt-12 border-t border-[var(--border)] pt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-sm text-[var(--muted-foreground)]">© 2025 Nestpoints.</p>
+      <p class="text-sm text-[var(--muted-foreground)]">Your data is yours: encrypted, never sold.</p>
+    </div>
+    <!-- say: Closing legal row balances the footer at both widths -->
+  </div>
+</footer>
+<script>
+// layout: a text panel floated over a map or picture moves beside it when it would cover other text
+(() => {
+  const guard = function swarmLayout(root, report) {
+  const doc = root.ownerDocument || root
+  const view = doc.defaultView
+  // a real sentence or name, not a pin number or a one-word label
+  const prose = el => [...el.querySelectorAll('*'), el].some(x => [...x.childNodes].some(n => n.nodeType === 3 && n.textContent.trim().length >= 12))
+  const area = r => Math.max(0, r.width) * Math.max(0, r.height)
+  const meet = (a, b) => Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left)) * Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top))
+  // on screen: not hidden, not faded out, not inside a closed <details> menu
+  const shown = el => el.checkVisibility ? el.checkVisibility({ opacityProperty: true, visibilityProperty: true }) : !el.closest('details:not([open])') && view.getComputedStyle(el).display !== 'none'
+
+  // every visible run of text in a section, with its box
+  function texts(section) {
+    const out = [], walk = doc.createTreeWalker(section, 4)
+    for (let n = walk.nextNode(); n; n = walk.nextNode()) {
+      if (!n.textContent.trim() || !n.parentElement || !shown(n.parentElement)) continue
+      const r = doc.createRange()
+      r.selectNodeContents(n)
+      const b = r.getBoundingClientRect()
+      if (area(b) > 0) out.push({ node: n, box: b })
+    }
+    return out
+  }
+
+  const clip = t => t.replace(/\s+/g, ' ').trim().slice(0, 48)
+  const found = []
+  for (const section of [...root.children]) {
+    // menus and dropdowns in the nav are meant to sit over the page
+    if (/^(SCRIPT|STYLE|LINK|TEMPLATE|NAV|HEADER)$/.test(section.tagName) || section.dataset.layer === 'nav') continue
+    // text panels the design positions absolutely, outermost first
+    const floats = [...section.querySelectorAll('*')].filter(el => !el.dataset.swarmFlow && view.getComputedStyle(el).position === 'absolute' && shown(el) && prose(el))
+    const outer = floats.filter(el => !floats.some(o => o !== el && o.contains(el)))
+    if (!outer.length) continue
+    const runs = texts(section)
+    const after = new Map()
+    for (const el of outer) {
+      const box = el.getBoundingClientRect()
+      // a badge poking out of its card is fine; a panel on top of other text is not
+      const hit = runs.find(t => !el.contains(t.node) && meet(box, t.box) > 0.25 * area(t.box))
+      if (!hit) continue
+      found.push({ layer: section.dataset.layer || null, index: [...root.children].indexOf(section), panel: clip(el.textContent), covers: clip(hit.node.textContent) })
+      if (report) continue
+      const host = el.offsetParent, hb = host?.getBoundingClientRect()
+      el.dataset.swarmFlow = '1'
+      Object.assign(el.style, { position: 'relative', inset: 'auto', transform: 'none', width: 'auto', maxWidth: '100%', zIndex: 'auto' })
+      // inside the section, the panel leaves the box and sits just above or below it
+      if (!host || host === section || !section.contains(host) || host.contains(section)) continue
+      if (box.top + box.height / 2 < hb.top + hb.height / 2 && !after.has(host)) {
+        host.before(el)
+        el.style.margin = '0 0 16px'
+      } else {
+        ;(after.get(host) || host).after(el)
+        after.set(host, el)
+        el.style.margin = '16px 0 0'
+      }
+    }
+  }
+  return found
+}
+  const run = () => guard(document.body)
+  run()
+  document.fonts && document.fonts.ready.then(run)
+  let t
+  addEventListener('resize', () => { clearTimeout(t); t = setTimeout(run, 150) })
+})()
+
+// motion: sections reveal as they scroll in
+addEventListener('load', () => (function swarmMotion(root, preset) {
+  const p = { gentle: { rise: 18, scale: 1, ms: 750, step: 70, ease: 'cubic-bezier(.2,.7,.2,1)' }, snappy: { rise: 36, scale: 0.96, ms: 520, step: 55, ease: 'cubic-bezier(.34,1.56,.64,1)' } }[preset] || { rise: 18, scale: 1, ms: 750, step: 70, ease: 'ease' }
+  const doc = root.ownerDocument || root
+  const html = doc.documentElement
+  html.style.setProperty('--m-rise', `${p.rise}px`)
+  html.style.setProperty('--m-scale', String(p.scale))
+  html.style.setProperty('--m-ms', `${p.ms}ms`)
+  html.style.setProperty('--m-ease', p.ease)
+  const view = doc.defaultView
+  if (view.matchMedia && view.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  const PICK = 'h1,h2,h3,h4,p,img,button,[data-goto],li,article,figure,blockquote,form,table,svg'
+  // the page's top-level blocks are its sections
+  const sections = [...root.children].filter(el => !/^(SCRIPT|STYLE|LINK|TEMPLATE)$/.test(el.tagName))
+  // once revealed, an element drops the reveal so its hover moves without a delay
+  const settle = el => {
+    const done = e => {
+      if (e.target !== el) return
+      el.removeEventListener('transitionend', done)
+      el.classList.remove('m-t', 'm-in')
+      el.style.removeProperty('--m-delay')
+    }
+    el.addEventListener('transitionend', done)
+  }
+  const show = s => s.querySelectorAll('.m-t:not(.m-in)').forEach(el => { settle(el); el.classList.add('m-in') })
+  const io = new view.IntersectionObserver(entries => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue
+      io.unobserve(e.target)
+      show(e.target)
+    }
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' })
+  sections.forEach((s, si) => {
+    if (s.dataset.mDone) return
+    s.dataset.mDone = '1'
+    // the nav is there from the start
+    if (/^(nav|header)$/i.test(s.tagName) || s.dataset.layer === 'nav' || (si === 0 && s.querySelector('nav'))) return
+    let n = 0
+    for (const el of s.querySelectorAll(PICK)) {
+      if (n >= 14) break
+      if (el.closest('.m-t') || (el.tagName.toLowerCase() !== 'svg' && el.closest('svg'))) continue
+      // tiny things, and things the design already moves or positions with a transform, stay put
+      if (el.getBoundingClientRect().height < 4 || view.getComputedStyle(el).transform !== 'none') continue
+      el.classList.add('m-t')
+      el.style.setProperty('--m-delay', `${Math.min(n, 10) * p.step}ms`)
+      n++
+    }
+    // the first screen plays as the page opens; the rest as it scrolls in
+    if (s.getBoundingClientRect().top < view.innerHeight * 0.9) view.requestAnimationFrame(() => view.requestAnimationFrame(() => show(s)))
+    else io.observe(s)
+  })
+})(document.body, "gentle"))
+
+// buttons and links made on the canvas name the page they go to
+const pages = {"ask-and-learn":"index.html","money-tracker":"money-tracker.html","perks-and-partners":"perks-and-partners.html","connections":"connections.html"}
+document.addEventListener('click', e => {
+  const go = e.target.closest('[data-goto]')
+  if (go && pages[go.dataset.goto]) { e.preventDefault(); location.href = pages[go.dataset.goto] }
+})
+document.addEventListener('submit', e => e.preventDefault())
+</script>
+</body>
+</html>

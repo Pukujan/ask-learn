@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ask & Learn</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --background: #FBF8F2;
+  --foreground: #22201C;
+  --primary: #C05621;
+  --primary-foreground: #FFF7ED;
+  --muted: #F0EAE0;
+  --muted-foreground: #6B6358;
+  --border: #E2D9CB;
+  --accent: #1F6F5C;
+  --card: #FFFFFF;
+  --font-heading: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --radius: 14px;
+}
+html, body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-body); }
+
+[data-goto],button,a[href]{transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
+[data-goto]:hover,button:hover{transform:translateY(-2px);filter:brightness(1.04)}
+.m-t{opacity:0;transform:translateY(var(--m-rise)) scale(var(--m-scale));transition:opacity var(--m-ms) var(--m-ease),transform var(--m-ms) var(--m-ease);transition-delay:var(--m-delay,0ms)}
+img.m-t{transform:scale(1.06)}
+.m-t.m-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.m-t{opacity:1;transform:none;transition:none}[data-goto]:hover,button:hover{transform:none}}
+</style>
+</head>
+<body>
+<!-- navigation -->
+<nav class="sticky top-0 z-50 bg-[var(--background)]/95 backdrop-blur border-b border-[var(--border)]">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex items-center justify-between h-16 gap-4">
+      <a href="#" data-goto="ask-and-learn" class="flex items-center gap-2 shrink-0">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-[var(--accent)]"></span>
+        <span class="text-lg tracking-tight text-[var(--foreground)]" style="font-family:var(--font-heading)">Nestpoints</span>
+      </a>
+
+      <ul class="hidden md:flex items-center gap-8 text-sm text-[var(--muted-foreground)]">
+        <li><a href="#" data-goto="ask-and-learn" class="hover:text-[var(--foreground)] transition-colors">Ask &amp; Learn</a></li>
+        <li><a href="#" data-goto="money-tracker" class="hover:text-[var(--foreground)] transition-colors">Money Tracker</a></li>
+        <li><a href="#" data-goto="perks-and-partners" class="hover:text-[var(--foreground)] transition-colors">Perks &amp; Partners</a></li>
+        <li><a href="#" data-goto="connections" class="hover:text-[var(--foreground)] transition-colors">Connections</a></li>
+      </ul>
+      <!-- say: I'm keeping mobile simple with just brand and CTA. -->
+
+      <a href="#" data-goto="money-tracker" class="inline-flex items-center justify-center shrink-0 px-4 py-2 text-sm font-medium bg-[var(--primary)] text-[var(--primary-foreground)] rounded-[var(--radius)] hover:opacity-90 transition-opacity">Start Free</a>
+    </div>
+
+    <div class="md:hidden pb-3 -mt-1 flex flex-wrap gap-x-5 gap-y-1 text-sm text-[var(--muted-foreground)]">
+      <a href="#" data-goto="ask-and-learn" class="hover:text-[var(--foreground)] transition-colors">Ask &amp; Learn</a>
+      <a href="#" data-goto="money-tracker" class="hover:text-[var(--foreground)] transition-colors">Money Tracker</a>
+      <a href="#" data-goto="perks-and-partners" class="hover:text-[var(--foreground)] transition-colors">Perks &amp; Partners</a>
+      <a href="#" data-goto="connections" class="hover:text-[var(--foreground)] transition-colors">Connections</a>
+    </div>
+  </div>
+</nav>
+
+<!-- hero -->
+<section class="relative overflow-hidden bg-[var(--background)]">
+  <!-- say: warm ledger hero, two columns, rust accent rules -->
+  <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+    <div class="grid gap-12 md:grid-cols-12 md:items-center">
+      <div class="md:col-span-7">
+        <!-- say: small honesty label above the big headline -->
+        <p class="inline-flex items-center gap-2 text-sm font-medium tracking-wide uppercase text-[var(--accent)]">
+          <span class="h-1.5 w-1.5 rounded-full bg-[var(--accent)]"></span>
+          Ask &amp; Learn
+        </p>
+        <h1 style="font-family:var(--font-heading)" class="mt-5 text-4xl leading-[1.1] md:text-6xl font-semibold tracking-tight text-[var(--foreground)]">
+          Real answers from real agents, not forum guesswork.
+        </h1>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-[var(--muted-foreground)]">
+          Ask anything about buying your first home. Verified agents, lenders, and neighbors who've been there answer in plain language — usually within a day.
+        </p>
+        <!-- say: two buttons, primary rust, secondary outline -->
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <a href="#" data-goto="connections" class="inline-flex items-center justify-center rounded-[var(--radius)] bg-[var(--primary)] px-6 py-3 text-base font-semibold text-[var(--primary-foreground)] transition-opacity hover:opacity-90">
+            Ask your first question
+          </a>
+          <a href="#" data-goto="money-tracker" class="inline-flex items-center justify-center rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] px-6 py-3 text-base font-semibold text-[var(--foreground)] transition-colors hover:bg-[var(--muted)]">
+            Browse answered questions
+          </a>
+        </div>
+      </div>
+
+      <div class="md:col-span-5">
+        <!-- say: one real photo in a sized box beside the copy -->
+        <div class="aspect-[4/5] w-full overflow-hidden rounded-[var(--radius)] border border-[var(--border)] bg-[var(--muted)]">
+          <img data-gen="Warm natural-light photo of a first-time homebuyer talking with a friendly real estate agent across a kitchen table, papers and coffee, calm candid documentary mood" alt="A first-time homebuyer talking with a friendly real estate agent over coffee" class="w-full h-full object-cover rounded-[var(--radius)]" src="img/2.webp">
+        </div>
+      </div>
+    </div>
+
+    <!-- say: stat strip dividers feel like a ledger row -->
+    <div class="mt-14 border-t border-[var(--border)] pt-8">
+      <dl class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+        <div class="flex items-baseline gap-3 sm:flex-col sm:items-start sm:gap-1 sm:border-l-2 sm:border-[var(--accent)] sm:pl-4">
+          <dt class="sr-only">Questions answered</dt>
+          <dd style="font-family:var(--font-heading)" class="text-3xl font-semibold text-[var(--foreground)]">12,400</dd>
+          <dd class="text-sm text-[var(--muted-foreground)]">questions answered</dd>
+        </div>
+        <div class="flex items-baseline gap-3 sm:flex-col sm:items-start sm:gap-1 sm:border-l-2 sm:border-[var(--accent)] sm:pl-4">
+          <dt class="sr-only">Verified agents</dt>
+          <dd style="font-family:var(--font-heading)" class="text-3xl font-semibold text-[var(--foreground)]">840</dd>
+          <dd class="text-sm text-[var(--muted-foreground)]">verified agents</dd>
+        </div>
+        <div class="flex items-baseline gap-3 sm:flex-col sm:items-start sm:gap-1 sm:border-l-2 sm:border-[var(--accent)] sm:pl-4">
+          <dt class="sr-only">Marked helpful</dt>
+          <dd style="font-family:var(--font-heading)" class="text-3xl font-semibold text-[var(--foreground)]">96%</dd>
+          <dd class="text-sm text-[var(--muted-foreground)]">marked helpful</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- question-composer -->
+<section class="bg-[var(--background)] py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- say: framing the composer as the page's main action -->
+    <div class="max-w-2xl">
+      <h2 class="text-3xl md:text-4xl tracking-tight text-[var(--foreground)]" style="font-family:var(--font-heading)">
+        Start with the question that's keeping you up at night.
+      </h2>
+      <p class="mt-4 text-base md:text-lg leading-relaxed text-[var(--muted-foreground)]">
+        Pick a topic, type it out, and we'll route it to the people who actually know.
+      </p>
+    </div>
+
+    <!-- say: composer card with crisp passbook edges -->
+    <div class="mt-10 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] p-6 md:p-8">
+      <label for="question-composer" class="sr-only">Your question</label>
+      <textarea
+        id="question-composer"
+        rows="4"
+        placeholder="e.g. How much do I really need before I tour a home?"
+        class="w-full resize-y rounded-[var(--radius)] border border-[var(--border)] bg-[var(--background)] px-4 py-3 text-base text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)]"
+      ></textarea>
+      <p class="mt-3 text-sm leading-relaxed text-[var(--muted-foreground)]">
+        You choose what's visible. Your name stays hidden until you share it.
+      </p>
+
+      <!-- say: topic chips let people tag their question quickly -->
+      <fieldset class="mt-8">
+        <legend class="text-xs font-semibold uppercase tracking-widest text-[var(--muted-foreground)]">
+          Topic
+        </legend>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <button type="button" class="rounded-full border border-[var(--border)] bg-[var(--background)] px-4 py-2 text-sm text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]">Down payments</button>
+          <button type="button" class="rounded-full border border-[var(--border)] bg-[var(--background)] px-4 py-2 text-sm text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]">Closing costs</button>
+          <button type="button" class="rounded-full border border-[var(--border)] bg-[var(--background)] px-4 py-2 text-sm text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]">Credit scores</button>
+          <button type="button" class="rounded-full border border-[var(--border)] bg-[var(--background)] px-4 py-2 text-sm text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]">Offers &amp; bidding</button>
+          <button type="button" class="rounded-full border border-[var(--border)] bg-[var(--background)] px-4 py-2 text-sm text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]">Inspections</button>
+          <button type="button" class="rounded-full border border-[var(--border)] bg-[var(--background)] px-4 py-2 text-sm text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]">Agent basics</button>
+          <button type="button" class="rounded-full border border-[var(--border)] bg-[var(--background)] px-4 py-2 text-sm text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]">Loans &amp; pre-approval</button>
+          <button type="button" class="rounded-full border border-[var(--border)] bg-[var(--background)] px-4 py-2 text-sm text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]">Neighbors' stories</button>
+        </div>
+      </fieldset>
+
+      <!-- say: routing toggle plus the primary post action -->
+      <div class="mt-8 flex flex-col gap-6 border-t border-[var(--border)] pt-6 md:flex-row md:items-center md:justify-between">
+        <div class="flex flex-col gap-3">
+          <label class="flex items-start gap-3 text-sm text-[var(--foreground)]">
+            <input type="radio" name="question-visibility" value="public" checked class="mt-0.5 h-4 w-4 accent-[var(--accent)]">
+            <span>Post publicly to the community</span>
+          </label>
+          <label class="flex items-start gap-3 text-sm text-[var(--foreground)]">
+            <input type="radio" name="question-visibility" value="agent" class="mt-0.5 h-4 w-4 accent-[var(--accent)]">
+            <span>Ask a verified agent directly</span>
+          </label>
+        </div>
+        <button type="button" class="inline-flex items-center justify-center rounded-[var(--radius)] bg-[var(--primary)] px-6 py-3 text-sm font-semibold text-[var(--primary-foreground)] transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--card)]">
+          Post question
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- expert-answer-feed -->
+<section class="bg-[var(--background)] py-20 sm:py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-2xl">
+      <p class="text-[var(--accent)] text-sm font-semibold uppercase tracking-[0.18em] mb-3">Ask &amp; Learn</p>
+      <h2 class="text-3xl sm:text-4xl leading-tight text-[var(--foreground)]" style="font-family:var(--font-heading)">Today's answers, straight from the source.</h2>
+    </div>
+
+    <!-- say: Two-column card grid, each answer with its own follow-up link. -->
+    <div class="mt-12 grid gap-6 sm:grid-cols-2">
+
+      <article class="flex flex-col bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-7">
+        <p class="text-lg leading-snug text-[var(--foreground)] font-medium" style="font-family:var(--font-heading)">"How much should I have saved before I start touring homes?"</p>
+        <div class="mt-5 border-l-2 border-[var(--accent)] pl-4">
+          <p class="text-sm font-semibold text-[var(--foreground)]">Dana R., verified agent, <span class="text-[var(--muted-foreground)] font-normal">14 years in Columbus</span></p>
+          <p class="mt-2 text-[15px] leading-relaxed text-[var(--muted-foreground)]">"Plan for 3% down plus 2–3% in closing costs. Tour early anyway — seeing homes sharpens what you actually want."</p>
+        </div>
+        <div class="mt-6 pt-5 border-t border-[var(--border)] flex flex-wrap items-center justify-between gap-4">
+          <span class="text-sm text-[var(--muted-foreground)]">3 neighbors marked this helpful</span>
+          <a href="#" data-goto="money-tracker" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--accent)] hover:opacity-80 transition-opacity">Ask a follow-up <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+
+      <article class="flex flex-col bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-7">
+        <p class="text-lg leading-snug text-[var(--foreground)] font-medium" style="font-family:var(--font-heading)">"Is a 640 credit score enough to get pre-approved?"</p>
+        <div class="mt-5 border-l-2 border-[var(--accent)] pl-4">
+          <p class="text-sm font-semibold text-[var(--foreground)]">Marcus L., <span class="text-[var(--muted-foreground)] font-normal">loan officer</span></p>
+          <p class="mt-2 text-[15px] leading-relaxed text-[var(--muted-foreground)]">"Often yes, with a higher rate. Getting pre-approved costs nothing and tells you exactly what to fix."</p>
+        </div>
+        <div class="mt-6 pt-5 border-t border-[var(--border)] flex flex-wrap items-center justify-between gap-4">
+          <span class="text-sm text-[var(--muted-foreground)]">5 neighbors marked this helpful</span>
+          <a href="#" data-goto="money-tracker" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--accent)] hover:opacity-80 transition-opacity">Ask a follow-up <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+
+      <!-- say: Card three and four keep the same rhythm with a neighbor voice. -->
+      <article class="flex flex-col bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-7">
+        <p class="text-lg leading-snug text-[var(--foreground)] font-medium" style="font-family:var(--font-heading)">"Do I need a buyer's agent if the listing agent is friendly?"</p>
+        <div class="mt-5 border-l-2 border-[var(--accent)] pl-4">
+          <p class="text-sm font-semibold text-[var(--foreground)]">Priya S., <span class="text-[var(--muted-foreground)] font-normal">verified agent</span></p>
+          <p class="mt-2 text-[15px] leading-relaxed text-[var(--muted-foreground)]">"Their job is the seller's side. Yours is yours. It costs you nothing to have someone in your corner."</p>
+        </div>
+        <div class="mt-6 pt-5 border-t border-[var(--border)] flex flex-wrap items-center justify-between gap-4">
+          <span class="text-sm text-[var(--muted-foreground)]">4 neighbors marked this helpful</span>
+          <a href="#" data-goto="perks-and-partners" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--accent)] hover:opacity-80 transition-opacity">Ask a follow-up <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+
+      <article class="flex flex-col bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-7">
+        <p class="text-lg leading-snug text-[var(--foreground)] font-medium" style="font-family:var(--font-heading)">"Closing costs surprised me — what should I expect?"</p>
+        <div class="mt-5 border-l-2 border-[var(--accent)] pl-4">
+          <p class="text-sm font-semibold text-[var(--foreground)]">Tasha W., <span class="text-[var(--muted-foreground)] font-normal">neighbor who closed 8 months ago</span></p>
+          <p class="mt-2 text-[15px] leading-relaxed text-[var(--muted-foreground)]">"Mine were about $6,800 on a $280k home. Ask your lender for a loan estimate in writing — it's the real number."</p>
+        </div>
+        <div class="mt-6 pt-5 border-t border-[var(--border)] flex flex-wrap items-center justify-between gap-4">
+          <span class="text-sm text-[var(--muted-foreground)]">7 neighbors marked this helpful</span>
+          <a href="#" data-goto="perks-and-partners" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--accent)] hover:opacity-80 transition-opacity">Ask a follow-up <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- topic-quests -->
+<!-- I'm building the quests section with a readiness score sidebar -->
+<section class="bg-[var(--background)] py-20">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+
+      <!-- Left: quests list -->
+      <div class="lg:col-span-8">
+        <h2 class="text-3xl sm:text-4xl text-[var(--foreground)] tracking-tight" style="font-family:var(--font-heading)">
+          Learn in quests, not scroll-holes.
+        </h2>
+        <p class="mt-4 text-[var(--muted-foreground)] max-w-2xl leading-relaxed">
+          Work through a topic, mark it complete, and watch your readiness score climb.
+        </p>
+
+        <!-- say: Starting the quest cards, each with progress and points -->
+        <div class="mt-10 space-y-4">
+
+          <!-- Quest 1 -->
+          <article class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6 sm:p-7">
+            <div class="flex flex-wrap items-start justify-between gap-4">
+              <div class="min-w-0">
+                <p class="text-xs uppercase tracking-widest text-[var(--muted-foreground)]">Quest 1</p>
+                <h3 class="mt-1 text-xl text-[var(--foreground)]" style="font-family:var(--font-heading)">
+                  Down Payment Basics
+                </h3>
+              </div>
+              <div class="text-right shrink-0">
+                <p class="text-sm font-medium text-[var(--accent)]">6 questions</p>
+                <p class="text-sm text-[var(--muted-foreground)]">4 of 6 complete · 120 points</p>
+              </div>
+            </div>
+            <div class="mt-5 h-2 w-full rounded-full bg-[var(--muted)] overflow-hidden">
+              <div class="h-full rounded-full bg-[var(--primary)]" style="width:66.7%"></div>
+            </div>
+          </article>
+
+          <!-- Quest 2 -->
+          <article class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6 sm:p-7">
+            <div class="flex flex-wrap items-start justify-between gap-4">
+              <div class="min-w-0">
+                <p class="text-xs uppercase tracking-widest text-[var(--muted-foreground)]">Quest 2</p>
+                <h3 class="mt-1 text-xl text-[var(--foreground)]" style="font-family:var(--font-heading)">
+                  Credit &amp; Pre-Approval
+                </h3>
+              </div>
+              <div class="text-right shrink-0">
+                <p class="text-sm font-medium text-[var(--accent)]">8 questions</p>
+                <p class="text-sm text-[var(--muted-foreground)]">8 of 8 complete · 180 points earned</p>
+              </div>
+            </div>
+            <!-- say: Quest 2 is done, so this bar sits full -->
+            <div class="mt-5 h-2 w-full rounded-full bg-[var(--muted)] overflow-hidden">
+              <div class="h-full rounded-full bg-[var(--primary)]" style="width:100%"></div>
+            </div>
+          </article>
+
+          <!-- Quest 3 -->
+          <article class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6 sm:p-7">
+            <div class="flex flex-wrap items-start justify-between gap-4">
+              <div class="min-w-0">
+                <p class="text-xs uppercase tracking-widest text-[var(--muted-foreground)]">Quest 3</p>
+                <h3 class="mt-1 text-xl text-[var(--foreground)]" style="font-family:var(--font-heading)">
+                  Offers, Inspections &amp; Closing
+                </h3>
+              </div>
+              <div class="text-right shrink-0">
+                <p class="text-sm font-medium text-[var(--accent)]">9 questions</p>
+                <p class="text-sm text-[var(--muted-foreground)]">not started · 200 points available</p>
+              </div>
+            </div>
+            <div class="mt-5 h-2 w-full rounded-full bg-[var(--muted)] overflow-hidden">
+              <div class="h-full rounded-full bg-[var(--primary)]" style="width:0%"></div>
+            </div>
+          </article>
+
+          <!-- say: Last quest card with a two-fifths progress bar -->
+          <!-- Quest 4 -->
+          <article class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6 sm:p-7">
+            <div class="flex flex-wrap items-start justify-between gap-4">
+              <div class="min-w-0">
+                <p class="text-xs uppercase tracking-widest text-[var(--muted-foreground)]">Quest 4</p>
+                <h3 class="mt-1 text-xl text-[var(--foreground)]" style="font-family:var(--font-heading)">
+                  Neighbors' First-Home Stories
+                </h3>
+              </div>
+              <div class="text-right shrink-0">
+                <p class="text-sm font-medium text-[var(--accent)]">5 questions</p>
+                <p class="text-sm text-[var(--muted-foreground)]">2 of 5 complete · 60 points</p>
+              </div>
+            </div>
+            <div class="mt-5 h-2 w-full rounded-full bg-[var(--muted)] overflow-hidden">
+              <div class="h-full rounded-full bg-[var(--primary)]" style="width:40%"></div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- Right: readiness score sidebar -->
+      <aside class="lg:col-span-4">
+        <div class="lg:sticky lg:top-8 bg-[var(--muted)] rounded-[var(--radius)] p-7">
+          <p class="text-sm uppercase tracking-widest text-[var(--muted-foreground)]">Your readiness score</p>
+          <!-- say: Big score number with a ring meter below -->
+          <p class="mt-3 text-[var(--foreground)]" style="font-family:var(--font-heading)">
+            <span class="text-6xl font-semibold leading-none">62</span>
+            <span class="text-2xl text-[var(--muted-foreground)]"> of 100</span>
+          </p>
+
+          <div class="mt-6 h-2.5 w-full rounded-full bg-[var(--card)] overflow-hidden">
+            <div class="h-full rounded-full bg-[var(--accent)]" style="width:62%"></div>
+          </div>
+
+          <a href="#money-tracker" data-goto="money-tracker"
+             class="mt-7 inline-flex items-center justify-center w-full px-5 py-3 rounded-[var(--radius)] bg-[var(--primary)] text-[var(--primary-foreground)] font-medium transition-opacity hover:opacity-90">
+            Continue a quest
+          </a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- trust-badges -->
+<section class="bg-[var(--background)] py-20">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- say: opening the trust section with its headline and subline -->
+    <div class="max-w-2xl">
+      <h2 class="text-3xl md:text-4xl text-[var(--foreground)] tracking-tight" style="font-family:var(--font-heading)">Why you can trust what you read here.</h2>
+      <p class="mt-4 text-base md:text-lg text-[var(--muted-foreground)] leading-relaxed">Every answer carries a badge, and every badge means something specific.</p>
+    </div>
+
+    <!-- say: four badge cards in a clean grid, ledger-style edges -->
+    <ul class="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <li class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6">
+        <div class="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          Verified Agent
+        </div>
+        <p class="mt-4 text-sm text-[var(--foreground)] leading-relaxed">License checked against state records before posting.</p>
+      </li>
+      <li class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6">
+        <div class="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg>
+          Verified Lender
+        </div>
+        <p class="mt-4 text-sm text-[var(--foreground)] leading-relaxed">NMLS number confirmed, answers reviewed for accuracy.</p>
+      </li>
+      <!-- say: continuing the badge row with neighbor and language badges -->
+      <li class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6">
+        <div class="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+          Neighbor Who Closed
+        </div>
+        <p class="mt-4 text-sm text-[var(--foreground)] leading-relaxed">Confirmed purchase in the last 24 months.</p>
+      </li>
+      <li class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6">
+        <div class="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4V5z"/><path d="M8 9h8"/><path d="M8 12h5"/></svg>
+          Plain-Language Promise
+        </div>
+        <p class="mt-4 text-sm text-[var(--foreground)] leading-relaxed">No jargon without a plain-English explanation.</p>
+      </li>
+    </ul>
+
+    <!-- say: data safety line sits below in its own muted panel with CTA -->
+    <div class="mt-10 bg-[var(--muted)] rounded-[var(--radius)] p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-6 border border-[var(--border)]">
+      <p class="text-sm md:text-base text-[var(--foreground)] leading-relaxed md:max-w-2xl">Your questions and badges are yours to see. Questions are private by default, we never sell your data, and you can delete any question and its answers at any time.</p>
+      <a href="#" data-goto="connections" class="shrink-0 inline-flex items-center justify-center gap-2 rounded-[var(--radius)] bg-[var(--primary)] px-5 py-3 text-sm font-semibold text-[var(--primary-foreground)] hover:opacity-90 transition-opacity">
+        Read the data safety guarantee
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- community-milestones -->
+<section class="bg-[var(--background)] py-20 px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <!-- say: Intro with headline and honest framing of the numbers -->
+    <div class="max-w-2xl">
+      <p class="text-sm font-semibold uppercase tracking-widest text-[var(--accent)]">Milestones</p>
+      <h2 class="mt-3 text-3xl md:text-4xl leading-tight text-[var(--foreground)]" style="font-family:var(--font-heading)">
+        A community that's actually closing.
+      </h2>
+      <p class="mt-4 text-[var(--muted-foreground)]">Numbers this month</p>
+    </div>
+
+    <!-- say: Four stat cards in a tidy responsive grid -->
+    <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] p-6">
+        <p class="text-3xl md:text-4xl text-[var(--foreground)]" style="font-family:var(--font-heading)">3,180</p>
+        <p class="mt-2 text-sm text-[var(--muted-foreground)]">questions asked</p>
+      </div>
+      <div class="rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] p-6">
+        <p class="text-3xl md:text-4xl text-[var(--foreground)]" style="font-family:var(--font-heading)">96%</p>
+        <p class="mt-2 text-sm text-[var(--muted-foreground)]">answered within 24 hours</p>
+      </div>
+      <div class="rounded-[var(--radius)] border border-[var(--border)] bg-[var(--primary)] p-6">
+        <p class="text-3xl md:text-4xl text-[var(--primary-foreground)]" style="font-family:var(--font-heading)">214</p>
+        <p class="mt-2 text-sm text-[var(--primary-foreground)] opacity-90">buyers marked "offer accepted"</p>
+      </div>
+      <div class="rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] p-6">
+        <p class="text-3xl md:text-4xl text-[var(--foreground)]" style="font-family:var(--font-heading)">1,102</p>
+        <p class="mt-2 text-sm text-[var(--muted-foreground)]">neighbors gave their first answer</p>
+      </div>
+    </div>
+
+    <!-- say: Milestone feed as a quiet ledger list -->
+    <div class="mt-14 grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+      <div class="lg:col-span-2">
+        <h3 class="text-xl text-[var(--foreground)]" style="font-family:var(--font-heading)">Milestone feed</h3>
+        <ul class="mt-6 divide-y divide-[var(--border)] border-y border-[var(--border)]">
+          <li class="flex items-start gap-4 py-5">
+            <span class="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[var(--accent)]"></span>
+            <p class="text-[var(--foreground)]">"Jordan K. answered 10 questions and unlocked the Neighbor Guide badge."</p>
+          </li>
+          <li class="flex items-start gap-4 py-5">
+            <span class="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[var(--accent)]"></span>
+            <p class="text-[var(--foreground)]">"The Cincinnati first-time buyer thread hit 500 answers."</p>
+          </li>
+          <li class="flex items-start gap-4 py-5">
+            <span class="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[var(--accent)]"></span>
+            <p class="text-[var(--foreground)]">"142 buyers completed the Down Payment Basics quest this week."</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- say: Side action card linking to money-tracker and perks -->
+      <div class="rounded-[var(--radius)] border border-[var(--border)] bg-[var(--muted)] p-7">
+        <p class="text-[var(--muted-foreground)] leading-relaxed">
+          Every milestone here started with one honest question. Keep watching the board, or start your own path.
+        </p>
+        <a href="#" data-goto="money-tracker" class="mt-6 inline-flex items-center justify-center w-full rounded-[var(--radius)] bg-[var(--primary)] px-5 py-3 text-sm font-semibold text-[var(--primary-foreground)]">
+          Follow the milestone board
+        </a>
+        <a href="#" data-goto="perks-and-partners" class="mt-3 inline-flex items-center justify-center w-full rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] px-5 py-3 text-sm font-semibold text-[var(--foreground)]">
+          See partner perks
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- cta -->
+<!-- CTA is the final layer; make it decisive. -->
+<section class="bg-[var(--background)] py-20 sm:py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="bg-[var(--primary)] text-[var(--primary-foreground)] rounded-[var(--radius)] px-6 py-14 sm:px-14 sm:py-16">
+      <!-- I lead with a confident headline in display serif. -->
+      <div class="max-w-2xl">
+        <h2 class="text-3xl sm:text-4xl leading-tight tracking-tight" style="font-family:var(--font-heading)">Ask the question. Get the real answer.</h2>
+        <p class="mt-5 text-base sm:text-lg text-[var(--primary-foreground)]/85 leading-relaxed">Free to ask, free to read, and your first question gets routed to a verified agent today.</p>
+      </div>
+
+      <!-- Buttons sit below the copy, never over it. -->
+      <div class="mt-9 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+        <button type="button" data-goto="money-tracker" class="inline-flex items-center justify-center rounded-[var(--radius)] bg-[var(--background)] text-[var(--foreground)] px-7 py-3 text-sm font-semibold hover:bg-[var(--muted)] transition-colors">Start Free</button>
+        <button type="button" data-goto="money-tracker" class="inline-flex items-center justify-center rounded-[var(--radius)] border border-[var(--primary-foreground)]/40 text-[var(--primary-foreground)] px-7 py-3 text-sm font-semibold hover:bg-[var(--primary-foreground)]/10 transition-colors">See Money Tracker</button>
+      </div>
+
+      <!-- Small quiet links for the other pages finish the section. -->
+      <div class="mt-10 pt-8 border-t border-[var(--primary-foreground)]/20 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm">
+        <a href="#" data-goto="connections" class="text-[var(--primary-foreground)]/80 hover:text-[var(--primary-foreground)] underline underline-offset-4 decoration-[var(--primary-foreground)]/30 transition-colors">Meet agents and neighbors in Connections</a>
+        <a href="#" data-goto="perks-and-partners" class="text-[var(--primary-foreground)]/80 hover:text-[var(--primary-foreground)] underline underline-offset-4 decoration-[var(--primary-foreground)]/30 transition-colors">See Perks &amp; Partners</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer class="bg-[var(--muted)] border-t border-[var(--border)]">
+  <div class="max-w-6xl mx-auto px-6 py-14">
+    <div class="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+      <div class="max-w-sm">
+        <p class="text-xl text-[var(--foreground)]" style="font-family:var(--font-heading)">Nestpoints</p>
+        <!-- say: Brand promise sits alone under the wordmark -->
+        <p class="mt-2 text-sm leading-relaxed text-[var(--muted-foreground)]">Every first-time buyer deserves a straight answer.</p>
+      </div>
+      <nav aria-label="Footer" class="grid grid-cols-2 gap-x-8 gap-y-3 text-sm sm:gap-x-14">
+        <a href="#" data-goto="ask-and-learn" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Ask &amp; Learn</a>
+        <a href="#" data-goto="money-tracker" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Money Tracker</a>
+        <a href="#" data-goto="perks-and-partners" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Perks &amp; Partners</a>
+        <a href="#" data-goto="connections" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Connections</a>
+        <!-- say: Remaining footer links are text-only, no page targets -->
+        <a href="#" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Data Safety Promise</a>
+        <a href="#" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Refer a Friend</a>
+      </nav>
+    </div>
+    <div class="mt-12 border-t border-[var(--border)] pt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-sm text-[var(--muted-foreground)]">© 2025 Nestpoints.</p>
+      <p class="text-sm text-[var(--muted-foreground)]">Your data is yours: encrypted, never sold.</p>
+    </div>
+    <!-- say: Closing legal row balances the footer at both widths -->
+  </div>
+</footer>
+<script>
+// layout: a text panel floated over a map or picture moves beside it when it would cover other text
+(() => {
+  const guard = function swarmLayout(root, report) {
+  const doc = root.ownerDocument || root
+  const view = doc.defaultView
+  // a real sentence or name, not a pin number or a one-word label
+  const prose = el => [...el.querySelectorAll('*'), el].some(x => [...x.childNodes].some(n => n.nodeType === 3 && n.textContent.trim().length >= 12))
+  const area = r => Math.max(0, r.width) * Math.max(0, r.height)
+  const meet = (a, b) => Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left)) * Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top))
+  // on screen: not hidden, not faded out, not inside a closed <details> menu
+  const shown = el => el.checkVisibility ? el.checkVisibility({ opacityProperty: true, visibilityProperty: true }) : !el.closest('details:not([open])') && view.getComputedStyle(el).display !== 'none'
+
+  // every visible run of text in a section, with its box
+  function texts(section) {
+    const out = [], walk = doc.createTreeWalker(section, 4)
+    for (let n = walk.nextNode(); n; n = walk.nextNode()) {
+      if (!n.textContent.trim() || !n.parentElement || !shown(n.parentElement)) continue
+      const r = doc.createRange()
+      r.selectNodeContents(n)
+      const b = r.getBoundingClientRect()
+      if (area(b) > 0) out.push({ node: n, box: b })
+    }
+    return out
+  }
+
+  const clip = t => t.replace(/\s+/g, ' ').trim().slice(0, 48)
+  const found = []
+  for (const section of [...root.children]) {
+    // menus and dropdowns in the nav are meant to sit over the page
+    if (/^(SCRIPT|STYLE|LINK|TEMPLATE|NAV|HEADER)$/.test(section.tagName) || section.dataset.layer === 'nav') continue
+    // text panels the design positions absolutely, outermost first
+    const floats = [...section.querySelectorAll('*')].filter(el => !el.dataset.swarmFlow && view.getComputedStyle(el).position === 'absolute' && shown(el) && prose(el))
+    const outer = floats.filter(el => !floats.some(o => o !== el && o.contains(el)))
+    if (!outer.length) continue
+    const runs = texts(section)
+    const after = new Map()
+    for (const el of outer) {
+      const box = el.getBoundingClientRect()
+      // a badge poking out of its card is fine; a panel on top of other text is not
+      const hit = runs.find(t => !el.contains(t.node) && meet(box, t.box) > 0.25 * area(t.box))
+      if (!hit) continue
+      found.push({ layer: section.dataset.layer || null, index: [...root.children].indexOf(section), panel: clip(el.textContent), covers: clip(hit.node.textContent) })
+      if (report) continue
+      const host = el.offsetParent, hb = host?.getBoundingClientRect()
+      el.dataset.swarmFlow = '1'
+      Object.assign(el.style, { position: 'relative', inset: 'auto', transform: 'none', width: 'auto', maxWidth: '100%', zIndex: 'auto' })
+      // inside the section, the panel leaves the box and sits just above or below it
+      if (!host || host === section || !section.contains(host) || host.contains(section)) continue
+      if (box.top + box.height / 2 < hb.top + hb.height / 2 && !after.has(host)) {
+        host.before(el)
+        el.style.margin = '0 0 16px'
+      } else {
+        ;(after.get(host) || host).after(el)
+        after.set(host, el)
+        el.style.margin = '16px 0 0'
+      }
+    }
+  }
+  return found
+}
+  const run = () => guard(document.body)
+  run()
+  document.fonts && document.fonts.ready.then(run)
+  let t
+  addEventListener('resize', () => { clearTimeout(t); t = setTimeout(run, 150) })
+})()
+
+// motion: sections reveal as they scroll in
+addEventListener('load', () => (function swarmMotion(root, preset) {
+  const p = { gentle: { rise: 18, scale: 1, ms: 750, step: 70, ease: 'cubic-bezier(.2,.7,.2,1)' }, snappy: { rise: 36, scale: 0.96, ms: 520, step: 55, ease: 'cubic-bezier(.34,1.56,.64,1)' } }[preset] || { rise: 18, scale: 1, ms: 750, step: 70, ease: 'ease' }
+  const doc = root.ownerDocument || root
+  const html = doc.documentElement
+  html.style.setProperty('--m-rise', `${p.rise}px`)
+  html.style.setProperty('--m-scale', String(p.scale))
+  html.style.setProperty('--m-ms', `${p.ms}ms`)
+  html.style.setProperty('--m-ease', p.ease)
+  const view = doc.defaultView
+  if (view.matchMedia && view.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  const PICK = 'h1,h2,h3,h4,p,img,button,[data-goto],li,article,figure,blockquote,form,table,svg'
+  // the page's top-level blocks are its sections
+  const sections = [...root.children].filter(el => !/^(SCRIPT|STYLE|LINK|TEMPLATE)$/.test(el.tagName))
+  // once revealed, an element drops the reveal so its hover moves without a delay
+  const settle = el => {
+    const done = e => {
+      if (e.target !== el) return
+      el.removeEventListener('transitionend', done)
+      el.classList.remove('m-t', 'm-in')
+      el.style.removeProperty('--m-delay')
+    }
+    el.addEventListener('transitionend', done)
+  }
+  const show = s => s.querySelectorAll('.m-t:not(.m-in)').forEach(el => { settle(el); el.classList.add('m-in') })
+  const io = new view.IntersectionObserver(entries => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue
+      io.unobserve(e.target)
+      show(e.target)
+    }
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' })
+  sections.forEach((s, si) => {
+    if (s.dataset.mDone) return
+    s.dataset.mDone = '1'
+    // the nav is there from the start
+    if (/^(nav|header)$/i.test(s.tagName) || s.dataset.layer === 'nav' || (si === 0 && s.querySelector('nav'))) return
+    let n = 0
+    for (const el of s.querySelectorAll(PICK)) {
+      if (n >= 14) break
+      if (el.closest('.m-t') || (el.tagName.toLowerCase() !== 'svg' && el.closest('svg'))) continue
+      // tiny things, and things the design already moves or positions with a transform, stay put
+      if (el.getBoundingClientRect().height < 4 || view.getComputedStyle(el).transform !== 'none') continue
+      el.classList.add('m-t')
+      el.style.setProperty('--m-delay', `${Math.min(n, 10) * p.step}ms`)
+      n++
+    }
+    // the first screen plays as the page opens; the rest as it scrolls in
+    if (s.getBoundingClientRect().top < view.innerHeight * 0.9) view.requestAnimationFrame(() => view.requestAnimationFrame(() => show(s)))
+    else io.observe(s)
+  })
+})(document.body, "gentle"))
+
+// buttons and links made on the canvas name the page they go to
+const pages = {"ask-and-learn":"index.html","money-tracker":"money-tracker.html","perks-and-partners":"perks-and-partners.html","connections":"connections.html"}
+document.addEventListener('click', e => {
+  const go = e.target.closest('[data-goto]')
+  if (go && pages[go.dataset.goto]) { e.preventDefault(); location.href = pages[go.dataset.goto] }
+})
+document.addEventListener('submit', e => e.preventDefault())
+</script>
+</body>
+</html>

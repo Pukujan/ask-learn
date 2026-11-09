@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Money Tracker</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --background: #FBF8F2;
+  --foreground: #22201C;
+  --primary: #C05621;
+  --primary-foreground: #FFF7ED;
+  --muted: #F0EAE0;
+  --muted-foreground: #6B6358;
+  --border: #E2D9CB;
+  --accent: #1F6F5C;
+  --card: #FFFFFF;
+  --font-heading: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --radius: 14px;
+}
+html, body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-body); }
+
+[data-goto],button,a[href]{transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
+[data-goto]:hover,button:hover{transform:translateY(-2px);filter:brightness(1.04)}
+.m-t{opacity:0;transform:translateY(var(--m-rise)) scale(var(--m-scale));transition:opacity var(--m-ms) var(--m-ease),transform var(--m-ms) var(--m-ease);transition-delay:var(--m-delay,0ms)}
+img.m-t{transform:scale(1.06)}
+.m-t.m-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.m-t{opacity:1;transform:none;transition:none}[data-goto]:hover,button:hover{transform:none}}
+</style>
+</head>
+<body>
+<!-- navigation -->
+<nav class="sticky top-0 z-50 bg-[var(--background)]/95 backdrop-blur border-b border-[var(--border)]">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex items-center justify-between h-16 gap-4">
+      <a href="#" data-goto="ask-and-learn" class="flex items-center gap-2 shrink-0">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-[var(--accent)]"></span>
+        <span class="text-lg tracking-tight text-[var(--foreground)]" style="font-family:var(--font-heading)">Nestpoints</span>
+      </a>
+
+      <ul class="hidden md:flex items-center gap-8 text-sm text-[var(--muted-foreground)]">
+        <li><a href="#" data-goto="ask-and-learn" class="hover:text-[var(--foreground)] transition-colors">Ask &amp; Learn</a></li>
+        <li><a href="#" data-goto="money-tracker" class="hover:text-[var(--foreground)] transition-colors">Money Tracker</a></li>
+        <li><a href="#" data-goto="perks-and-partners" class="hover:text-[var(--foreground)] transition-colors">Perks &amp; Partners</a></li>
+        <li><a href="#" data-goto="connections" class="hover:text-[var(--foreground)] transition-colors">Connections</a></li>
+      </ul>
+      <!-- say: I'm keeping mobile simple with just brand and CTA. -->
+
+      <a href="#" data-goto="money-tracker" class="inline-flex items-center justify-center shrink-0 px-4 py-2 text-sm font-medium bg-[var(--primary)] text-[var(--primary-foreground)] rounded-[var(--radius)] hover:opacity-90 transition-opacity">Start Free</a>
+    </div>
+
+    <div class="md:hidden pb-3 -mt-1 flex flex-wrap gap-x-5 gap-y-1 text-sm text-[var(--muted-foreground)]">
+      <a href="#" data-goto="ask-and-learn" class="hover:text-[var(--foreground)] transition-colors">Ask &amp; Learn</a>
+      <a href="#" data-goto="money-tracker" class="hover:text-[var(--foreground)] transition-colors">Money Tracker</a>
+      <a href="#" data-goto="perks-and-partners" class="hover:text-[var(--foreground)] transition-colors">Perks &amp; Partners</a>
+      <a href="#" data-goto="connections" class="hover:text-[var(--foreground)] transition-colors">Connections</a>
+    </div>
+  </div>
+</nav>
+
+<!-- hero -->
+<section class="bg-[var(--background)]">
+  <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+      <!-- say: Hero copy left, image right on desktop -->
+      <div>
+        <p class="text-sm uppercase tracking-[0.18em] text-[var(--accent)] font-semibold mb-4" style="font-family:var(--font-body)">Money Tracker</p>
+        <h1 class="text-4xl md:text-5xl font-semibold leading-tight text-[var(--foreground)] mb-6" style="font-family:var(--font-heading)">Watch your down payment grow, one week at a time.</h1>
+        <p class="text-lg leading-relaxed text-[var(--muted-foreground)] max-w-xl mb-8" style="font-family:var(--font-body)">The average Nestpoints saver adds $640 more per month than they did before. Set a goal, log a deposit, keep the streak alive.</p>
+        <!-- say: Two clear calls to action below the copy -->
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="#" data-goto="ask-and-learn" class="inline-flex items-center justify-center px-6 py-3 bg-[var(--primary)] text-[var(--primary-foreground)] font-medium rounded-[var(--radius)] border border-[var(--primary)] hover:opacity-90 transition-opacity" style="font-family:var(--font-body)">Set My Savings Goal</a>
+          <a href="#" data-goto="perks-and-partners" class="inline-flex items-center justify-center px-6 py-3 bg-[var(--card)] text-[var(--foreground)] font-medium rounded-[var(--radius)] border border-[var(--border)] hover:bg-[var(--muted)] transition-colors" style="font-family:var(--font-body)">See How Streaks Work</a>
+        </div>
+      </div>
+      <!-- say: One photo showing steady weekly saving progress -->
+      <div class="aspect-[4/3] w-full overflow-hidden rounded-[var(--radius)] bg-[var(--muted)]">
+        <img data-gen="Warm, softly lit desk scene with a savings passbook open beside a jar of coins and a hand adding a small deposit, calm paper-ledger tones with rust accents" alt="A person logging a weekly savings deposit beside an open savings passbook" class="w-full h-full object-cover rounded-[var(--radius)]" src="img/1.webp">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- savings-goal-dashboard -->
+<section class="bg-[var(--background)] py-20 sm:py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- say: I open with the dashboard heading and a short lede -->
+    <div class="max-w-2xl">
+      <p class="text-xs uppercase tracking-[0.2em] text-[var(--accent)] font-medium mb-3" style="font-family:var(--font-heading)">Your Dashboard</p>
+      <h2 class="text-3xl sm:text-4xl leading-tight text-[var(--foreground)]" style="font-family:var(--font-heading)">The Whole Picture, Passbook Plain.</h2>
+    </div>
+
+    <div class="mt-10 grid gap-6 lg:grid-cols-3">
+      <!-- say: Main goal card holds the headline numbers and progress -->
+      <div class="lg:col-span-2 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p class="text-sm text-[var(--muted-foreground)]">Goal</p>
+            <p class="mt-1 text-2xl sm:text-3xl text-[var(--foreground)]" style="font-family:var(--font-heading)">$48,000 down payment</p>
+          </div>
+          <div class="text-right">
+            <p class="text-sm text-[var(--muted-foreground)]">Saved so far</p>
+            <p class="mt-1 text-2xl sm:text-3xl text-[var(--foreground)]" style="font-family:var(--font-heading)">$17,340 <span class="text-[var(--accent)]">(36%)</span></p>
+          </div>
+        </div>
+
+        <!-- say: A single bar shows steady 36 percent progress -->
+        <div class="mt-8">
+          <div class="h-3 w-full rounded-full bg-[var(--muted)] overflow-hidden">
+            <div class="h-full w-[36%] rounded-full bg-[var(--primary)]"></div>
+          </div>
+          <div class="mt-2 flex justify-between text-xs text-[var(--muted-foreground)]">
+            <span>$0</span>
+            <span>$48,000</span>
+          </div>
+        </div>
+
+        <!-- say: Three supporting figures split into quiet columns -->
+        <dl class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-px overflow-hidden rounded-[var(--radius)] border border-[var(--border)] bg-[var(--border)]">
+          <div class="bg-[var(--card)] p-5">
+            <dt class="text-xs uppercase tracking-wider text-[var(--muted-foreground)]">Projected close</dt>
+            <dd class="mt-2 text-lg text-[var(--foreground)]" style="font-family:var(--font-heading)">August 2027</dd>
+          </div>
+          <div class="bg-[var(--card)] p-5">
+            <dt class="text-xs uppercase tracking-wider text-[var(--muted-foreground)]">This month</dt>
+            <dd class="mt-2 text-lg text-[var(--foreground)]" style="font-family:var(--font-heading)">+$1,180</dd>
+          </div>
+          <div class="bg-[var(--card)] p-5">
+            <dt class="text-xs uppercase tracking-wider text-[var(--muted-foreground)]">Streak</dt>
+            <dd class="mt-2 text-lg text-[var(--foreground)]" style="font-family:var(--font-heading)">14 weeks</dd>
+          </div>
+        </dl>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <button type="button" class="rounded-[var(--radius)] bg-[var(--primary)] px-5 py-3 text-sm font-medium text-[var(--primary-foreground)]">Adjust My Target</button>
+        </div>
+      </div>
+
+      <!-- say: Breakdown card lists each target line item -->
+      <div class="rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8">
+        <h3 class="text-lg text-[var(--foreground)]" style="font-family:var(--font-heading)">Breakdown</h3>
+        <ul class="mt-5 divide-y divide-[var(--border)]">
+          <li class="flex items-center justify-between py-3">
+            <span class="text-sm text-[var(--muted-foreground)]">Down payment</span>
+            <span class="text-sm font-medium text-[var(--foreground)]">$48,000</span>
+          </li>
+          <li class="flex items-center justify-between py-3">
+            <span class="text-sm text-[var(--muted-foreground)]">Closing costs</span>
+            <span class="text-sm font-medium text-[var(--foreground)]">$6,200</span>
+          </li>
+          <li class="flex items-center justify-between py-3">
+            <span class="text-sm text-[var(--muted-foreground)]">Cash reserve</span>
+            <span class="text-sm font-medium text-[var(--foreground)]">$4,000</span>
+          </li>
+          <li class="flex items-center justify-between py-4">
+            <span class="text-sm font-medium text-[var(--foreground)]">Total target</span>
+            <span class="text-base font-medium text-[var(--accent)]" style="font-family:var(--font-heading)">$58,200</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- streak-and-badges -->
+Here is the HTML fragment for the money tracker's streak and badges layer, styled with Tailwind and set against the warm paper-ledger theme.
+```html
+<section class="w-full bg-[var(--background)] py-16 sm:py-24">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <!-- say: Header and intro text for the streak section -->
+    <div class="max-w-2xl">
+      <h2 class="text-3xl sm:text-4xl tracking-tight text-[var(--foreground)]" style="font-family:var(--font-heading)">
+        Streaks &amp; Badges
+      </h2>
+      <p class="mt-4 text-base sm:text-lg leading-relaxed text-[var(--muted-foreground)]">
+        Small habits, visible progress — that's the whole trick.
+      </p>
+    </div>
+
+    <!-- say: Two-column layout on desktop, stacked on mobile -->
+    <div class="mt-10 grid gap-6 lg:gap-8 lg:grid-cols-5 lg:items-start">
+
+      <!-- say: Left card shows current streak prominently -->
+      <div class="lg:col-span-2 bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6 sm:p-8">
+        <p class="text-sm font-medium uppercase tracking-widest text-[var(--muted-foreground)]">
+          Current streak
+        </p>
+        <div class="mt-3 flex items-baseline gap-2">
+          <span class="text-5xl sm:text-6xl font-semibold leading-none text-[var(--accent)]" style="font-family:var(--font-heading)">
+            14
+          </span>
+          <span class="text-lg text-[var(--muted-foreground)]">weeks</span>
+        </div>
+
+        <!-- say: Decorative block-of-weeks visual to reinforce the streak -->
+        <div class="mt-6 flex flex-wrap gap-1.5" aria-hidden="true">
+          <span class="h-2.5 w-2.5 rounded-[3px] bg-[var(--accent)]"></span>
+          <span class="h-2.5 w-2.5 rounded-[3px] bg-[var(--accent)]"></span>
+          <span class="h-2.5 w-2.5 rounded-[3px] bg-[var(--accent)]"></span>
+          <span class="h-2.5 w-2.5 rounded-[3px] bg-[var(--accent)]"></span>
+          <span class="h-2.5 w-2.5 rounded-[3px] bg-[var(--accent)]"></span>
+          <span class="h-2.5 w-2.5 rounded-[3px] bg-[var(--accent)]"></span>
+          <span class="h-2.5 w-2.5 rounded-[3px] bg-[var(--accent)]"></span>
+          <span class="h-2.5 w-2.5 rounded-[3px] bg-[var(--accent)]"></span>
+          <span class="h-2.5 w-2.5 rounded-[3px] bg-[var(--accent)]"></span>
+          <span class="h-2.5 w-2.5 rounded-[3px] bg-[var(--accent)]"></span>
+          <span class="h-2.5 w-2.5 rounded-[3px] bg-[var(--accent)]"></span>
+          <span class="h-2.5 w-2.5 rounded-[3px] bg-[var(--accent)]"></span>
+          <span class="h-2.5 w-2.5 rounded-[3px] bg-[var(--accent)]"></span>
+          <span class="h-2.5 w-2.5 rounded-[3px] bg-[var(--accent)]"></span>
+        </div>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#" data-goto="perks-and-partners"
+             class="inline-flex items-center justify-center rounded-[var(--radius)] bg-[var(--primary)] px-5 py-2.5 text-sm font-medium text-[var(--primary-foreground)] transition-opacity hover:opacity-90">
+            Share My Streak
+          </a>
+          <a href="#" data-goto="connections"
+             class="inline-flex items-center justify-center rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] px-5 py-2.5 text-sm font-medium text-[var(--foreground)] transition-colors hover:bg-[var(--muted)]">
+            Browse All Badges
+          </a>
+        </div>
+      </div>
+
+      <!-- say: Right column holds earned badges and the next milestone -->
+      <div class="lg:col-span-3 space-y-6">
+
+        <!-- say: Earned badges grid with simple inline SVG icons -->
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6 sm:p-8">
+          <p class="text-sm font-medium uppercase tracking-widest text-[var(--muted-foreground)]">
+            Earned badges
+          </p>
+          <ul class="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <li class="flex items-center gap-3 rounded-[var(--radius)] bg-[var(--muted)] px-4 py-3">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--primary-foreground)]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true"><path d="M10 1.5a1 1 0 0 1 1 1v6.6l3.5-2.5a1 1 0 1 1 1.2 1.6L11 11.3v6.2a1 1 0 1 1-2 0v-6.2L4.3 8.2a1 1 0 1 1 1.2-1.6L9 9.1V2.5a1 1 0 0 1 1-1Z"/></svg>
+              </span>
+              <span class="text-sm text-[var(--foreground)]">First Deposit</span>
+            </li>
+            <li class="flex items-center gap-3 rounded-[var(--radius)] bg-[var(--muted)] px-4 py-3">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--primary-foreground)]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.7-9.3a1 1 0 0 0-1.4-1.4L9 10.6 7.7 9.3a1 1 0 0 0-1.4 1.4l2 2a1 1 0 0 0 1.4 0l4-4Z" clip-rule="evenodd"/></svg>
+              </span>
+              <span class="text-sm text-[var(--foreground)]">4-Week Streak</span>
+            </li>
+            <li class="flex items-center gap-3 rounded-[var(--radius)] bg-[var(--muted)] px-4 py-3">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--primary-foreground)]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true"><path d="M9.25 1.5a.75.75 0 0 1 1.5 0v1.6a7 7 0 0 1 3.9 1.62l1.13-1.13a.75.75 0 1 1 1.06 1.06l-1.13 1.13a7 7 0 0 1 1.62 3.9h1.6a.75.75 0 0 1 0 1.5h-1.6a7 7 0 0 1-1.62 3.9l1.13 1.13a.75.75 0 1 1-1.06 1.06l-1.13-1.13a7 7 0 0 1-3.9 1.62v1.6a.75.75 0 0 1-1.5 0v-1.6a7 7 0 0 1-3.9-1.62l-1.13 1.13a.75.75 0 1 1-1.06-1.06l1.13-1.13a7 7 0 0 1-1.62-3.9H1.75a.75.75 0 0 1 0-1.5h1.6a7 7 0 0 1 1.62-3.9L3.84 4.17a.75.75 0 0 1 1.06-1.06l1.13 1.13a7 7 0 0 1 3.9-1.62V1.5ZM10 5.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z"/></svg>
+              </span>
+              <span class="text-sm text-[var(--foreground)]">$10,000 Saved</span>
+            </li>
+            <li class="flex items-center gap-3 rounded-[var(--radius)] bg-[var(--muted)] px-4 py-3">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--primary-foreground)]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm1-12a1 1 0 1 0-2 0v3H6a1 1 0 1 0 0 2h3v3a1 1 0 1 0 2 0v-3h3a1 1 0 1 0 0-2h-3V6Z" clip-rule="evenodd"/></svg>
+              </span>
+              <span class="text-sm text-[var(--foreground)]">Gym Regular</span>
+            </li>
+            <li class="flex items-center gap-3 rounded-[var(--radius)] bg-[var(--muted)] px-4 py-3">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--primary-foreground)]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true"><path d="M10 2a.75.75 0 0 1 .67.416l1.86 3.77 4.16.605a.75.75 0 0 1 .416 1.28l-3.01 2.935.71 4.145a.75.75 0 0 1-1.088.79L10 13.045l-3.72 1.956a.75.75 0 0 1-1.088-.79l.71-4.145-3.01-2.935a.75.75 0 0 1 .416-1.28l4.16-.605 1.86-3.77A.75.75 0 0 1 10 2Z"/></svg>
+              </span>
+              <span class="text-sm text-[var(--foreground)]">Big Week ($1,000+)</span>
+            </li>
+            <li class="flex items-center gap-3 rounded-[var(--radius)] bg-[var(--muted)] px-4 py-3">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--primary-foreground)]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.7-9.3a1 1 0 0 0-1.4-1.4L9 10.6 7.7 9.3a1 1 0 0 0-1.4 1.4l2 2a1 1 0 0 0 1.4 0l4-4Z" clip-rule="evenodd"/></svg>
+              </span>
+              <span class="text-sm text-[var(--foreground)]">12-Week Streak</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- say: Next milestone card with a subtle accent border -->
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6 sm:p-8">
+          <div class="flex flex-col gap-1">
+            <p class="text-sm font-medium uppercase tracking-widest text-[var(--muted-foreground)]">
+              Next up
+            </p>
+            <p class="text-lg font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">
+              16-Week Streak
+            </p>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-[var(--muted-foreground)]">
+            Free mortgage-rate check with a Nestpoints lender.
+          </p>
+          <!-- say: Progress bar showing 14 of 16 weeks toward next badge -->
+          <div class="mt-5">
+            <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
+              <span>Progress</span>
+              <span>14 / 16</span>
+            </div>
+            <div class="mt-2 h-2 w-full rounded-full bg-[var(--muted)] overflow-hidden">
+              <div class="h-full rounded-full bg-[var(--accent)]" style="width: 87.5%"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+```
+### Streak and Badge Mechanics
+
+The section turns weekly saving into a visible, rewarding habit by combining a few key pieces:
+
+- **Current streak card** – Highlights the 14-week streak with a large number and a row of small filled blocks, making progress feel tangible at a glance. Two action buttons invite sharing or browsing badges.
+- **Earned badges grid** – Six badges are presented in a two-column layout on desktop, each with a simple inline SVG icon and the exact badge name, giving weight to past achievements.
+- **Next milestone card** – Shows the upcoming 16-Week Streak badge with a progress bar (14/16) and the free mortgage-rate check reward, creating clear forward momentum.
+---
+
+**Optimization Tip:** The `href="#"` placeholder links on the two buttons should be replaced with the actual routes for the perks-and-partners and connections pages.
+
+<!-- closing-cost-breakdown -->
+<section class="bg-[var(--background)] py-20 sm:py-28">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <!-- say: Opening the closing-cost layer with a clear headline and intro. -->
+    <div class="max-w-2xl">
+      <h2 class="text-3xl sm:text-4xl font-semibold text-[var(--foreground)] tracking-tight" style="font-family:var(--font-heading)">Don't Forget Closing Costs</h2>
+      <p class="mt-4 text-base sm:text-lg leading-relaxed text-[var(--muted-foreground)]">Most first-timers budget for the down payment and get blindsided by the rest. Here's the real math on a $400,000 home:</p>
+    </div>
+
+    <!-- say: Ledger card holding the line-item breakdown and total. -->
+    <div class="mt-10 grid gap-8 lg:grid-cols-5 lg:items-start">
+
+      <div class="lg:col-span-3 bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6 sm:p-8">
+        <div class="flex items-baseline justify-between gap-4 pb-4 border-b border-[var(--border)]">
+          <span class="text-xs uppercase tracking-[0.14em] text-[var(--muted-foreground)]">Line item</span>
+          <span class="text-xs uppercase tracking-[0.14em] text-[var(--muted-foreground)]">Amount</span>
+        </div>
+
+        <dl class="divide-y divide-[var(--border)]">
+          <div class="flex items-baseline justify-between gap-4 py-4">
+            <dt class="text-sm sm:text-base text-[var(--foreground)]">Down payment 10%</dt>
+            <dd class="text-sm sm:text-base font-medium text-[var(--foreground)] tabular-nums">$40,000</dd>
+          </div>
+          <div class="flex items-baseline justify-between gap-4 py-4">
+            <dt class="text-sm sm:text-base text-[var(--foreground)]">Loan origination</dt>
+            <dd class="text-sm sm:text-base font-medium text-[var(--foreground)] tabular-nums">$1,600</dd>
+          </div>
+          <div class="flex items-baseline justify-between gap-4 py-4">
+            <dt class="text-sm sm:text-base text-[var(--foreground)]">Title &amp; escrow</dt>
+            <dd class="text-sm sm:text-base font-medium text-[var(--foreground)] tabular-nums">$1,900</dd>
+          </div>
+          <div class="flex items-baseline justify-between gap-4 py-4">
+            <dt class="text-sm sm:text-base text-[var(--foreground)]">Appraisal &amp; inspection</dt>
+            <dd class="text-sm sm:text-base font-medium text-[var(--foreground)] tabular-nums">$850</dd>
+          </div>
+          <div class="flex items-baseline justify-between gap-4 py-4">
+            <dt class="text-sm sm:text-base text-[var(--foreground)]">Prepaid taxes &amp; insurance</dt>
+            <dd class="text-sm sm:text-base font-medium text-[var(--foreground)] tabular-nums">$2,400</dd>
+          </div>
+          <div class="flex items-baseline justify-between gap-4 py-4">
+            <dt class="text-sm sm:text-base text-[var(--foreground)]">Recording fees</dt>
+            <dd class="text-sm sm:text-base font-medium text-[var(--foreground)] tabular-nums">$350</dd>
+          </div>
+        </dl>
+
+        <!-- say: Total row sits inside the ledger for continuity. -->
+        <div class="mt-2 pt-5 border-t-2 border-[var(--foreground)] flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <span class="text-base sm:text-lg font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Estimated total</span>
+          <span class="text-2xl sm:text-3xl font-semibold text-[var(--accent)] tabular-nums" style="font-family:var(--font-heading)">$47,100</span>
+        </div>
+      </div>
+
+      <!-- say: Side column with the range note and the call to action. -->
+      <div class="lg:col-span-2 flex flex-col gap-6">
+        <div class="bg-[var(--muted)] border border-[var(--border)] rounded-[var(--radius)] p-6 sm:p-7">
+          <p class="text-sm sm:text-base leading-relaxed text-[var(--foreground)]">typical range 2&ndash;5% of purchase price</p>
+          <div class="mt-5">
+            <div class="h-2 w-full rounded-full bg-[var(--border)] overflow-hidden">
+              <div class="h-full w-3/5 rounded-full bg-[var(--accent)]"></div>
+            </div>
+            <div class="mt-2 flex justify-between text-xs text-[var(--muted-foreground)]">
+              <span>2%</span>
+              <span>5%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6 sm:p-7">
+          <p class="text-sm sm:text-base leading-relaxed text-[var(--foreground)]">Nestpoints tracks both goals in one ledger.</p>
+          <a href="#" data-goto="money-tracker" class="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-[var(--radius)] bg-[var(--primary)] px-5 py-3 text-sm font-medium text-[var(--primary-foreground)] transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--card)]">
+            Add Closing Costs To My Plan
+          </a>
+          <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            <a href="#" data-goto="ask-and-learn" class="text-[var(--accent)] underline underline-offset-4 decoration-[var(--border)] hover:decoration-[var(--accent)]">Ask &amp; Learn</a>
+            <a href="#" data-goto="connections" class="text-[var(--accent)] underline underline-offset-4 decoration-[var(--border)] hover:decoration-[var(--accent)]">Connections</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- partner-boost-list -->
+<!-- partner boost list layer: everyday spending headline plus four partner earn rows -->
+<section class="bg-[var(--muted)] py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- say: heading and intro set the "link once" promise -->
+    <div class="max-w-2xl">
+      <p class="text-xs font-semibold tracking-[0.18em] uppercase text-[var(--accent)] mb-4">Partner boost</p>
+      <h2 class="text-3xl md:text-4xl leading-tight text-[var(--foreground)]" style="font-family:var(--font-heading)">Everyday Spending, Moved Into Your Fund.</h2>
+      <p class="mt-4 text-[var(--muted-foreground)] leading-relaxed">Link a partner account once and your points flow straight into the tracker.</p>
+    </div>
+
+    <!-- say: ledger-style rows for each partner earn rate -->
+    <ul class="mt-12 bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] divide-y divide-[var(--border)] overflow-hidden">
+      <li class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 px-6 py-6">
+        <div class="shrink-0 w-10 h-10 rounded-[var(--radius)] bg-[var(--muted)] border border-[var(--border)] flex items-center justify-center">
+          <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h16"/><path d="M6 10V5h12v5"/><path d="M7 21h10"/><path d="M12 5v16"/></svg>
+        </div>
+        <div class="sm:w-44 shrink-0">
+          <p class="text-base font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Restaurants</p>
+        </div>
+        <p class="text-[var(--muted-foreground)] leading-relaxed">3x points on dining with 1,200+ local partners.</p>
+      </li>
+
+      <li class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 px-6 py-6">
+        <div class="shrink-0 w-10 h-10 rounded-[var(--radius)] bg-[var(--muted)] border border-[var(--border)] flex items-center justify-center">
+          <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18"/><path d="M6 7v3a3 3 0 0 0 6 0V7"/><path d="M15 7v3a3 3 0 0 0 6 0V7"/><path d="M9 17h6"/><path d="M12 17v3"/></svg>
+        </div>
+        <div class="sm:w-44 shrink-0">
+          <p class="text-base font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Gyms</p>
+        </div>
+        <p class="text-[var(--muted-foreground)] leading-relaxed">500 points monthly just for checking in.</p>
+      </li>
+
+      <!-- say: transport and rent rows keep the same rhythm -->
+      <li class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 px-6 py-6">
+        <div class="shrink-0 w-10 h-10 rounded-[var(--radius)] bg-[var(--muted)] border border-[var(--border)] flex items-center justify-center">
+          <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16V9l2-4h10l2 4v7"/><path d="M3 16h18"/><circle cx="7.5" cy="18" r="1.5"/><circle cx="16.5" cy="18" r="1.5"/></svg>
+        </div>
+        <div class="sm:w-44 shrink-0">
+          <p class="text-base font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Lyft</p>
+        </div>
+        <p class="text-[var(--muted-foreground)] leading-relaxed">2x points on every ride, plus a $25 first-ride credit.</p>
+      </li>
+
+      <li class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 px-6 py-6">
+        <div class="shrink-0 w-10 h-10 rounded-[var(--radius)] bg-[var(--muted)] border border-[var(--border)] flex items-center justify-center">
+          <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+        </div>
+        <div class="sm:w-44 shrink-0">
+          <p class="text-base font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">BILT</p>
+        </div>
+        <p class="text-[var(--muted-foreground)] leading-relaxed">pay rent, earn points toward your down payment — no fee.</p>
+      </li>
+    </ul>
+
+    <!-- say: concierge and referral bonus as two paired cards -->
+    <div class="mt-6 grid gap-6 sm:grid-cols-2">
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6">
+        <p class="text-sm font-semibold tracking-wide uppercase text-[var(--accent)]">Concierge</p>
+        <p class="mt-3 text-[var(--foreground)] leading-relaxed">Book a Nestpoints concierge to find your next spot and earn 1.5x.</p>
+      </div>
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6">
+        <p class="text-sm font-semibold tracking-wide uppercase text-[var(--accent)]">Referral bonus</p>
+        <p class="mt-3 text-[var(--foreground)] leading-relaxed">+5,000 points when a friend starts saving.</p>
+      </div>
+    </div>
+
+    <!-- say: two actions out to partners and connections -->
+    <div class="mt-10 flex flex-col sm:flex-row gap-3">
+      <a href="#" data-goto="connections" class="inline-flex items-center justify-center rounded-[var(--radius)] bg-[var(--primary)] px-6 py-3 text-sm font-semibold text-[var(--primary-foreground)] hover:opacity-90 transition-opacity">Link My Accounts</a>
+      <a href="#" data-goto="perks-and-partners" class="inline-flex items-center justify-center rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] px-6 py-3 text-sm font-semibold text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors">See All Partners</a>
+    </div>
+  </div>
+</section>
+
+<!-- faq -->
+<section class="bg-[var(--background)] py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- say: starting the FAQ layer with heading and intro -->
+    <div class="max-w-2xl">
+      <p class="text-xs uppercase tracking-[0.18em] text-[var(--accent)] mb-4">Questions, answered</p>
+      <h2 class="text-3xl md:text-4xl leading-tight text-[var(--foreground)]" style="font-family:var(--font-heading)">Questions, answered plainly.</h2>
+    </div>
+
+    <!-- say: laying out the five Q and A rows on a rule-lined list -->
+    <div class="mt-12 grid gap-8 md:grid-cols-[1fr_2fr] md:gap-16">
+      <div class="hidden md:block">
+        <div class="border-t border-[var(--border)] pt-6">
+          <p class="text-sm text-[var(--muted-foreground)]">Five things buyers ask before they start logging deposits.</p>
+        </div>
+      </div>
+
+      <div class="border-t border-[var(--border)]">
+        <dl>
+          <div class="py-7 border-b border-[var(--border)]">
+            <dt class="text-lg font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Do I have to connect my bank?</dt>
+            <dd class="mt-2 text-[var(--muted-foreground)] leading-relaxed">No — you can log deposits by hand, but linked accounts update your streak automatically.</dd>
+          </div>
+          <div class="py-7 border-b border-[var(--border)]">
+            <dt class="text-lg font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Is my data safe?</dt>
+            <dd class="mt-2 text-[var(--muted-foreground)] leading-relaxed">Yes. Bank connections use tokenized read-only access; we never see or store your login. Your data is never sold.</dd>
+          </div>
+          <div class="py-7 border-b border-[var(--border)]">
+            <dt class="text-lg font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">What if I break my streak?</dt>
+            <dd class="mt-2 text-[var(--muted-foreground)] leading-relaxed">One grace week per month keeps you covered — a missed week pauses your streak instead of resetting it.</dd>
+          </div>
+          <div class="py-7 border-b border-[var(--border)]">
+            <dt class="text-lg font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Can my partner save with me?</dt>
+            <dd class="mt-2 text-[var(--muted-foreground)] leading-relaxed">Yes, invite up to three co-savers to a shared goal.</dd>
+          </div>
+          <div class="py-7 border-b border-[var(--border)]">
+            <dt class="text-lg font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Do points expire?</dt>
+            <dd class="mt-2 text-[var(--muted-foreground)] leading-relaxed">Points stay in your fund until you spend them on closing costs or transfer them out.</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- say: closing with a rust-accented prompt card and one link -->
+    <div class="mt-14 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] px-7 py-6">
+      <p class="text-[var(--foreground)]">Something else on your mind? We answer in plain language, no jargon.</p>
+      <a href="#" data-goto="ask-and-learn" class="inline-flex shrink-0 items-center justify-center rounded-[var(--radius)] bg-[var(--primary)] px-6 py-3 text-sm font-semibold text-[var(--primary-foreground)] transition-opacity hover:opacity-90">Ask &amp; Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- cta -->
+<section class="bg-[var(--background)] py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] px-6 py-12 md:px-16 md:py-16">
+      <div class="max-w-2xl">
+        <!-- say: Opening the closing call to action with the exact promise line. -->
+        <h2 style="font-family:var(--font-heading)" class="text-3xl md:text-5xl leading-tight tracking-tight text-[var(--foreground)]">
+          Your down payment won't save itself.
+        </h2>
+        <p class="mt-5 text-base md:text-lg text-[var(--muted-foreground)] leading-relaxed">
+          But it will show up — every week, in plain figures. Start free, set a target, and see where you stand in two minutes.
+        </p>
+        <!-- say: Two primary actions; the rest are quiet text links to sibling pages. -->
+        <div class="mt-9 flex flex-col sm:flex-row gap-3">
+          <a href="#" data-goto="connections" class="inline-flex items-center justify-center bg-[var(--primary)] text-[var(--primary-foreground)] rounded-[var(--radius)] px-7 py-3.5 text-sm font-semibold tracking-wide hover:opacity-90 transition-opacity">
+            Start Free
+          </a>
+          <a href="#" data-goto="perks-and-partners" class="inline-flex items-center justify-center border border-[var(--border)] text-[var(--foreground)] rounded-[var(--radius)] px-7 py-3.5 text-sm font-semibold tracking-wide hover:bg-[var(--muted)] transition-colors">
+            Build My Streak
+          </a>
+        </div>
+        <!-- say: Offering one low-pressure link to Ask & Learn below the buttons. -->
+        <p class="mt-8 text-sm text-[var(--muted-foreground)]">
+          Questions first?
+          <a href="#" data-goto="ask-and-learn" class="text-[var(--accent)] font-semibold underline underline-offset-4 decoration-[var(--border)] hover:decoration-[var(--accent)] transition-colors">
+            Ask &amp; Learn
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer class="bg-[var(--muted)] border-t border-[var(--border)]">
+  <div class="max-w-6xl mx-auto px-6 py-14">
+    <div class="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+      <div class="max-w-sm">
+        <p class="text-xl text-[var(--foreground)]" style="font-family:var(--font-heading)">Nestpoints</p>
+        <!-- say: Brand promise sits alone under the wordmark -->
+        <p class="mt-2 text-sm leading-relaxed text-[var(--muted-foreground)]">Every first-time buyer deserves a straight answer.</p>
+      </div>
+      <nav aria-label="Footer" class="grid grid-cols-2 gap-x-8 gap-y-3 text-sm sm:gap-x-14">
+        <a href="#" data-goto="ask-and-learn" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Ask &amp; Learn</a>
+        <a href="#" data-goto="money-tracker" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Money Tracker</a>
+        <a href="#" data-goto="perks-and-partners" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Perks &amp; Partners</a>
+        <a href="#" data-goto="connections" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Connections</a>
+        <!-- say: Remaining footer links are text-only, no page targets -->
+        <a href="#" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Data Safety Promise</a>
+        <a href="#" class="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors">Refer a Friend</a>
+      </nav>
+    </div>
+    <div class="mt-12 border-t border-[var(--border)] pt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-sm text-[var(--muted-foreground)]">© 2025 Nestpoints.</p>
+      <p class="text-sm text-[var(--muted-foreground)]">Your data is yours: encrypted, never sold.</p>
+    </div>
+    <!-- say: Closing legal row balances the footer at both widths -->
+  </div>
+</footer>
+<script>
+// layout: a text panel floated over a map or picture moves beside it when it would cover other text
+(() => {
+  const guard = function swarmLayout(root, report) {
+  const doc = root.ownerDocument || root
+  const view = doc.defaultView
+  // a real sentence or name, not a pin number or a one-word label
+  const prose = el => [...el.querySelectorAll('*'), el].some(x => [...x.childNodes].some(n => n.nodeType === 3 && n.textContent.trim().length >= 12))
+  const area = r => Math.max(0, r.width) * Math.max(0, r.height)
+  const meet = (a, b) => Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left)) * Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top))
+  // on screen: not hidden, not faded out, not inside a closed <details> menu
+  const shown = el => el.checkVisibility ? el.checkVisibility({ opacityProperty: true, visibilityProperty: true }) : !el.closest('details:not([open])') && view.getComputedStyle(el).display !== 'none'
+
+  // every visible run of text in a section, with its box
+  function texts(section) {
+    const out = [], walk = doc.createTreeWalker(section, 4)
+    for (let n = walk.nextNode(); n; n = walk.nextNode()) {
+      if (!n.textContent.trim() || !n.parentElement || !shown(n.parentElement)) continue
+      const r = doc.createRange()
+      r.selectNodeContents(n)
+      const b = r.getBoundingClientRect()
+      if (area(b) > 0) out.push({ node: n, box: b })
+    }
+    return out
+  }
+
+  const clip = t => t.replace(/\s+/g, ' ').trim().slice(0, 48)
+  const found = []
+  for (const section of [...root.children]) {
+    // menus and dropdowns in the nav are meant to sit over the page
+    if (/^(SCRIPT|STYLE|LINK|TEMPLATE|NAV|HEADER)$/.test(section.tagName) || section.dataset.layer === 'nav') continue
+    // text panels the design positions absolutely, outermost first
+    const floats = [...section.querySelectorAll('*')].filter(el => !el.dataset.swarmFlow && view.getComputedStyle(el).position === 'absolute' && shown(el) && prose(el))
+    const outer = floats.filter(el => !floats.some(o => o !== el && o.contains(el)))
+    if (!outer.length) continue
+    const runs = texts(section)
+    const after = new Map()
+    for (const el of outer) {
+      const box = el.getBoundingClientRect()
+      // a badge poking out of its card is fine; a panel on top of other text is not
+      const hit = runs.find(t => !el.contains(t.node) && meet(box, t.box) > 0.25 * area(t.box))
+      if (!hit) continue
+      found.push({ layer: section.dataset.layer || null, index: [...root.children].indexOf(section), panel: clip(el.textContent), covers: clip(hit.node.textContent) })
+      if (report) continue
+      const host = el.offsetParent, hb = host?.getBoundingClientRect()
+      el.dataset.swarmFlow = '1'
+      Object.assign(el.style, { position: 'relative', inset: 'auto', transform: 'none', width: 'auto', maxWidth: '100%', zIndex: 'auto' })
+      // inside the section, the panel leaves the box and sits just above or below it
+      if (!host || host === section || !section.contains(host) || host.contains(section)) continue
+      if (box.top + box.height / 2 < hb.top + hb.height / 2 && !after.has(host)) {
+        host.before(el)
+        el.style.margin = '0 0 16px'
+      } else {
+        ;(after.get(host) || host).after(el)
+        after.set(host, el)
+        el.style.margin = '16px 0 0'
+      }
+    }
+  }
+  return found
+}
+  const run = () => guard(document.body)
+  run()
+  document.fonts && document.fonts.ready.then(run)
+  let t
+  addEventListener('resize', () => { clearTimeout(t); t = setTimeout(run, 150) })
+})()
+
+// motion: sections reveal as they scroll in
+addEventListener('load', () => (function swarmMotion(root, preset) {
+  const p = { gentle: { rise: 18, scale: 1, ms: 750, step: 70, ease: 'cubic-bezier(.2,.7,.2,1)' }, snappy: { rise: 36, scale: 0.96, ms: 520, step: 55, ease: 'cubic-bezier(.34,1.56,.64,1)' } }[preset] || { rise: 18, scale: 1, ms: 750, step: 70, ease: 'ease' }
+  const doc = root.ownerDocument || root
+  const html = doc.documentElement
+  html.style.setProperty('--m-rise', `${p.rise}px`)
+  html.style.setProperty('--m-scale', String(p.scale))
+  html.style.setProperty('--m-ms', `${p.ms}ms`)
+  html.style.setProperty('--m-ease', p.ease)
+  const view = doc.defaultView
+  if (view.matchMedia && view.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  const PICK = 'h1,h2,h3,h4,p,img,button,[data-goto],li,article,figure,blockquote,form,table,svg'
+  // the page's top-level blocks are its sections
+  const sections = [...root.children].filter(el => !/^(SCRIPT|STYLE|LINK|TEMPLATE)$/.test(el.tagName))
+  // once revealed, an element drops the reveal so its hover moves without a delay
+  const settle = el => {
+    const done = e => {
+      if (e.target !== el) return
+      el.removeEventListener('transitionend', done)
+      el.classList.remove('m-t', 'm-in')
+      el.style.removeProperty('--m-delay')
+    }
+    el.addEventListener('transitionend', done)
+  }
+  const show = s => s.querySelectorAll('.m-t:not(.m-in)').forEach(el => { settle(el); el.classList.add('m-in') })
+  const io = new view.IntersectionObserver(entries => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue
+      io.unobserve(e.target)
+      show(e.target)
+    }
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' })
+  sections.forEach((s, si) => {
+    if (s.dataset.mDone) return
+    s.dataset.mDone = '1'
+    // the nav is there from the start
+    if (/^(nav|header)$/i.test(s.tagName) || s.dataset.layer === 'nav' || (si === 0 && s.querySelector('nav'))) return
+    let n = 0
+    for (const el of s.querySelectorAll(PICK)) {
+      if (n >= 14) break
+      if (el.closest('.m-t') || (el.tagName.toLowerCase() !== 'svg' && el.closest('svg'))) continue
+      // tiny things, and things the design already moves or positions with a transform, stay put
+      if (el.getBoundingClientRect().height < 4 || view.getComputedStyle(el).transform !== 'none') continue
+      el.classList.add('m-t')
+      el.style.setProperty('--m-delay', `${Math.min(n, 10) * p.step}ms`)
+      n++
+    }
+    // the first screen plays as the page opens; the rest as it scrolls in
+    if (s.getBoundingClientRect().top < view.innerHeight * 0.9) view.requestAnimationFrame(() => view.requestAnimationFrame(() => show(s)))
+    else io.observe(s)
+  })
+})(document.body, "gentle"))
+
+// buttons and links made on the canvas name the page they go to
+const pages = {"ask-and-learn":"index.html","money-tracker":"money-tracker.html","perks-and-partners":"perks-and-partners.html","connections":"connections.html"}
+document.addEventListener('click', e => {
+  const go = e.target.closest('[data-goto]')
+  if (go && pages[go.dataset.goto]) { e.preventDefault(); location.href = pages[go.dataset.goto] }
+})
+document.addEventListener('submit', e => e.preventDefault())
+</script>
+</body>
+</html>
